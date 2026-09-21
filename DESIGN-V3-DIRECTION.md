@@ -1,4 +1,4 @@
-# zdelp.co 設計方向 v3（2026-09-21，Fiamma 已認可方向，待 Codex 意見）
+# zdelp.co 設計方向 v3（2026-09-21，Fiamma 認可、Codex 六點修正已套用、已部署 staging）
 
 原型：preview/ui-v3-home.html（Artifact https://claude.ai/artifact/87bGtcEur1K9J1YfaVcvPF）
 右下角可切換：header 深色／淺色、字級 v3／現行。
@@ -26,4 +26,4 @@
 ## 待辦（方向定案後）
 1. 把 v3 樣式與「網絡」主軸套進 src/build_site.py 全六頁＋EN，重新部署 staging。
 2. Fiamma 提供：現場照片、人物卡照片與職稱、hero 真實照片（可不露正臉）。
-3. 文案若因主軸調整需要改動，請 Codex 回饋後再統一改（首頁以外五頁目前仍是 09-21 交付稿）。
+3. Codex 六點修正已於 09-21 下午全部套用並部署 staging（見 HANDOVER）。
