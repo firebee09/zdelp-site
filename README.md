@@ -6,7 +6,7 @@
 - `preview/`：Artifact 預覽（data-URI）＋雙 gate 用純文字。
 - 原則：zdelp.co 只放摘要卡＋外連 zagdim.com 詳情頁，不複製全文。
 
-## 部署（待 Fiamma 開 GitHub 帳號）
+## 部署（已完成 2026-09-21：GitHub Pages）
 1. repo `zdelp-site`，push 整個資料夾。
 2. Cloudflare Pages 連 repo，build command 無、output `dist`。
 3. GoDaddy DNS：`@` CNAME → `<project>.pages.dev`（或 A/AAAA 依 Cloudflare 指示）、`www` CNAME 同上；取消 Website Builder。
