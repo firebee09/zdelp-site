@@ -1,0 +1,5 @@
+preview/
+mock/
+hubspot/*.json
+*.png.bak
+.DS_Store
