@@ -205,3 +205,6 @@ footer{background:var(--navy-2);color:rgba(255,255,255,.82);padding:48px 0 32px;
 html.anim section .wrap>*{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
 html.anim section .wrap>.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){html.anim section .wrap>*{opacity:1;transform:none;transition:none}*{transition:none!important}}
+/* footer partner entry (B2B, quiet) */
+.foot-partner{display:inline-block;margin-top:10px;font-size:13.5px;color:rgba(255,255,255,.6)!important;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25)}
+.foot-partner:hover{color:#fff!important}
