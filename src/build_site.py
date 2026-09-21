@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-"""zdelp.co 全站建置 v2（2026-09-21：套用 Codex 交付文案；zh/en 雙語可切換）。
+"""zdelp.co 全站建置 v3（2026-09-21：v2 Codex 文案＋v3 設計「一個窗口，聯通全球」；zh/en 雙語可切換；手機選單）。
 輸出：dist/{index,services,verify,partners,about,contact}.html ＋ dist/en/…（相對 assets）；
 preview/site.html（單檔、data-URI、hash 切頁，給 Artifact）；preview/gate-<lang>-<page>.md。"""
 import io, os, re, base64, json, html, shutil
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 A = os.path.join(ROOT, 'assets')
+LOGO_ALT = 'ZDelp'
 CSS = io.open(os.path.join(ROOT, 'src', 'zdelp.css'), encoding='utf-8').read()
 FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap">'
 ZAG = 'https://zagdim.com'
@@ -53,9 +54,11 @@ def nav(active, lang, preview, rel):
     other = 'en' if lang == 'zh' else 'zh'
     sw = ('#%s-%s' % (other, active)) if preview else (('en/' if other == 'en' else '../') + active + '.html')
     logo = img('zdelp.png', 'ZDelp', 'nav-logo', preview, True, rel)
-    return ('<header class="nav"><div class="wrap"><a class="logo" href="%s">%s<span>ZDelp<small>%s</small></span></a><nav class="links">%s</nav>'
+    menu_label = '選單' if lang == 'zh' else 'Menu'
+    return ('<header class="nav"><div class="wrap"><a class="logo" href="%s">%s<span>ZDelp<small>%s</small></span></a><nav class="links" id="zd-links">%s</nav>'
+            '<button class="burger" type="button" aria-label="%s" aria-expanded="false" aria-controls="zd-links" onclick="var l=this.parentNode.querySelector(\'.links\');var o=l.classList.toggle(\'open\');this.setAttribute(\'aria-expanded\',o)"><span></span></button>'
             '<a class="lang" href="%s" hreflang="%s">%s</a><a class="btn btn-gold nav-cta" href="%s">%s</a></div></header>') % (
-            link('index', lang, preview, rel), logo, t['tag'], items, sw, 'en' if other == 'en' else 'zh-Hant', t['sw'], link('contact', lang, preview, rel), t['cta'])
+            link('index', lang, preview, rel), logo, t['tag'], items, menu_label, sw, 'en' if other == 'en' else 'zh-Hant', t['sw'], link('contact', lang, preview, rel), t['cta'])
 
 def footer(lang, preview, rel):
     t = T[lang]
@@ -108,13 +111,22 @@ def p_index(lang, preview, rel):
         return f'''
 <section class="hero"><div class="wrap"><div class="hero-grid"><div>
 <p class="kick">{t['brand']}</p>
-<h1>需要幫忙，找 ZDelp。</h1>
-<p class="lead">簽證、銀行開戶、房產與公司事務。<br>你想辦什麼，告訴我們。</p>
-<div class="actions"><a class="btn btn-gold" href="{link('contact',lang,preview,rel)}">聯絡 ZDelp</a><a class="btn btn-line" href="{svc}">查看服務</a></div>
-</div><div class="hero-art">{img('photo-clients.jpg','ZDelp 專員與客人在泰國移民局辦理現場','',preview,True,rel)}</div></div></div></section>
-<section class="bg-grey"><div class="wrap"><div class="head"><div><h2>你需要哪方面協助？</h2></div></div><div class="cards four">{cards}</div></div></section>
-<section><div class="wrap"><div class="head"><div><h2>誰來幫你辦？</h2></div></div>{split_cards(lang)}<p class="note"><a href="{ver}">了解核驗制度</a></p></div></section>
-{cta_band(lang, preview, rel, '有事要辦，隨時告訴我們。')}'''
+<h1>需要幫忙，<br>找 <em>ZDelp</em>。</h1>
+<p class="lead">簽證、銀行開戶、房產與公司事務。<br>你想辦什麼，告訴 ZDelp。</p>
+<div class="actions"><a class="btn btn-gold btn-xl" href="{link('contact',lang,preview,rel)}">聯絡 ZDelp</a><a class="btn btn-ghost btn-xl" href="{svc}">查看服務</a></div>
+<div class="trust"><span><i>✓</i>香港註冊公司</span><span><i>✓</i>一個窗口，聯通全球</span><span><i>✓</i>辦理期間持續跟進</span></div>
+</div><div class="hero-art">{img('hero-people.jpg','ZDelp 專員與客人一起核對申請文件，背景是曼谷市景。','',preview,True,rel)}<div class="hero-cap"><i>●</i><div><b>LOCAL ASSISTANCE</b>在地辦理，持續跟進</div></div></div></div></div></section>
+<section class="bg-grey" id="svc"><div class="wrap"><div class="head"><div><p class="kick">服務</p><h2>你需要哪方面協助？</h2></div><p>先說你要辦什麼、在哪裡。每項服務都標示由誰辦理。</p></div><div class="cards four">{cards}</div></div></section>
+<section><div class="wrap"><div class="head"><div><p class="kick">怎麼運作</p><h2>一個窗口，<br>聯通全球。</h2></div><p>你不用自己在海外找人、比人、試人。ZDelp 協助安排合適服務，辦理期間持續跟進。</p></div>
+<div class="flow"><div class="fl"><i>1</i><b>你說需求</b><p>要辦什麼、在哪個地區。</p></div><div class="fl"><i>2</i><b>ZDelp 評估</b><p>判斷能不能幫、該怎麼安排。</p></div><div class="fl"><i>3</i><b>安排辦理</b><p>由 ZDelp 專員或通過核驗的持牌機構辦理，先給你資料再決定。</p></div><div class="fl"><i>4</i><b>持續跟進</b><p>辦理期間 ZDelp 不退場，協助溝通與協調。</p></div></div>
+<p class="split-note">協作服務費用由你與機構直接結算，ZDelp 不代收代付。<a href="{ver}">了解核驗制度</a></p></div></section>
+<section class="bg-grey"><div class="wrap"><div class="ground"><figure class="ground-photo">{img('photo-imm.jpg','曼谷移民局入口，辦理當天的排隊人潮。','',preview,False,rel)}<figcaption><b>BANGKOK · IMMIGRATION BUREAU</b>曼谷移民局，辦理當天</figcaption></figure>
+<div class="ground-text"><p class="kick">在現場</p><h2>在地辦理，<br>持續跟進。</h2><p>辦事的人在當地持牌、親自到場；跟進的是 ZDelp，隨時找得到。</p><p class="split-note"><a href="{link('contact',lang,preview,rel)}">聯絡 ZDelp</a></p></div></div></div></section>
+<section class="bg-navy" id="verify"><div class="wrap"><div class="head"><div><p class="kick">核驗制度</p><h2>先核驗，再合作。</h2></div><p>你有權知道是誰在替你辦事。每一家進入網絡的機構，ZDelp 都核對資料、訪談、觀察試單，合作後年度重審。</p></div>
+<div class="steps"><div class="step"><i>01</i><b>執照與登記</b><p>核對機構登記、相關執照與負責人資料。</p></div><div class="step"><i>02</i><b>視訊訪談</b><p>了解服務範圍、收費方式、溝通語言與處理經驗。</p></div><div class="step"><i>03</i><b>試單評估</b><p>觀察實際服務中的回覆、溝通與辦理情況。</p></div><div class="step"><i>04</i><b>年度重審</b><p>重新核對執照狀態、客人回饋與爭議紀錄。</p></div></div>
+<div class="seal-line"><div class="ring">✓</div><div><b>徽章不能付費取得。</b><p>機構通過 ZDelp 核驗後，才會取得核驗徽章。徽章表示機構通過核驗，不代表每項申請或服務必然取得預期結果。</p></div></div>
+<p class="note"><a href="{ver}" style="color:var(--gold)">查看完整核驗制度</a></p></div></section>
+{cta_band(lang, preview, rel, '有事要辦，隨時告訴我們。', sub='留下你想辦的事和所在地區，我們會告訴你能不能幫上忙。')}'''
     cards = (card(lang, 'dtv', 'Thai visas', 'Explore visa services for living, working or retiring in Thailand.', True, preview, rel, url=svc + ('' if preview else '#th'), btn='Explore visa services', external=False)
              + card(lang, 'bank', 'Bank accounts', 'Find help with opening an account and preparing your documents.', False, preview, rel)
              + card(lang, 'bkk', 'Property rental and management', 'Find help with letting your property and its day-to-day management.', False, preview, rel)
@@ -122,13 +134,22 @@ def p_index(lang, preview, rel):
     return f'''
 <section class="hero"><div class="wrap"><div class="hero-grid"><div>
 <p class="kick">{t['brand']}</p>
-<h1>Need help? Talk to ZDelp.</h1>
+<h1>Need help?<br>Talk to <em>ZDelp</em>.</h1>
 <p class="lead">Visas, bank accounts, property and company matters.<br>Tell us what you need help with.</p>
-<div class="actions"><a class="btn btn-gold" href="{link('contact',lang,preview,rel)}">Contact ZDelp</a><a class="btn btn-line" href="{svc}">Explore services</a></div>
-</div><div class="hero-art">{img('photo-clients.jpg','ZDelp specialist with clients at Thai Immigration','',preview,True,rel)}</div></div></div></section>
-<section class="bg-grey"><div class="wrap"><div class="head"><div><h2>What can we help you with?</h2></div></div><div class="cards four">{cards}</div></div></section>
-<section><div class="wrap"><div class="head"><div><h2>Who handles the work?</h2></div></div>{split_cards(lang)}<p class="note"><a href="{ver}">About our vetting process</a></p></div></section>
-{cta_band(lang, preview, rel, 'Need a hand? Get in touch.')}'''
+<div class="actions"><a class="btn btn-gold btn-xl" href="{link('contact',lang,preview,rel)}">Contact ZDelp</a><a class="btn btn-ghost btn-xl" href="{svc}">Explore services</a></div>
+<div class="trust"><span><i>✓</i>Registered in Hong Kong</span><span><i>✓</i>One contact point, local help worldwide</span><span><i>✓</i>Follow-up while the work is under way</span></div>
+</div><div class="hero-art">{img('hero-people.jpg','A ZDelp specialist and a client checking application documents, with the Bangkok skyline behind them.','',preview,True,rel)}<div class="hero-cap"><i>●</i><div><b>LOCAL ASSISTANCE</b>Handled locally, followed up by ZDelp</div></div></div></div></div></section>
+<section class="bg-grey" id="svc"><div class="wrap"><div class="head"><div><p class="kick">Services</p><h2>What can we help you with?</h2></div><p>Tell us what you need and where. Each service shows who handles the work.</p></div><div class="cards four">{cards}</div></div></section>
+<section><div class="wrap"><div class="head"><div><p class="kick">How it works</p><h2>One contact point,<br>local help worldwide.</h2></div><p>You do not have to find, compare and test people overseas yourself. ZDelp arranges the right service and follows up while the work is under way.</p></div>
+<div class="flow"><div class="fl"><i>1</i><b>Tell us what you need</b><p>What you want to arrange, and where.</p></div><div class="fl"><i>2</i><b>ZDelp assesses</b><p>We tell you whether we can help and how it would be arranged.</p></div><div class="fl"><i>3</i><b>The work is arranged</b><p>Handled by ZDelp specialists or a vetted, licensed firm. You see the details before you decide.</p></div><div class="fl"><i>4</i><b>Follow-up</b><p>ZDelp stays involved, helping with communication and coordination.</p></div></div>
+<p class="split-note">For services provided by a partner firm, you pay the firm directly; ZDelp does not collect or make payments on your behalf.<a href="{ver}">About our vetting process</a></p></div></section>
+<section class="bg-grey"><div class="wrap"><div class="ground"><figure class="ground-photo">{img('photo-imm.jpg','The entrance of the Bangkok Immigration Bureau on an application day.','',preview,False,rel)}<figcaption><b>BANGKOK · IMMIGRATION BUREAU</b>Bangkok Immigration Bureau, application day</figcaption></figure>
+<div class="ground-text"><p class="kick">On the ground</p><h2>Handled locally,<br>followed up by ZDelp.</h2><p>The work is done by licensed people who are actually there. The follow-up comes from ZDelp, and you can always reach us.</p><p class="split-note"><a href="{link('contact',lang,preview,rel)}">Contact ZDelp</a></p></div></div></div></section>
+<section class="bg-navy" id="verify"><div class="wrap"><div class="head"><div><p class="kick">Our vetting process</p><h2>Vetted before we work together.</h2></div><p>You should know who is providing your service. Every firm in the network is checked, interviewed and observed on trial cases, with annual reviews after a partnership begins.</p></div>
+<div class="steps"><div class="step"><i>01</i><b>Licences and registration</b><p>We check the firm's registration, relevant licences and the details of the person responsible.</p></div><div class="step"><i>02</i><b>Video interview</b><p>We discuss the firm's services, fees, communication languages and experience.</p></div><div class="step"><i>03</i><b>Trial cases</b><p>We observe responses, communication and how the work is handled in practice.</p></div><div class="step"><i>04</i><b>Annual review</b><p>We review licence status, client feedback and dispute records.</p></div></div>
+<div class="seal-line"><div class="ring">✓</div><div><b>Our badge cannot be bought.</b><p>A firm receives a verification badge only after passing ZDelp's vetting process. The badge indicates that the firm has passed those checks; it does not promise a particular outcome for every application or service.</p></div></div>
+<p class="note"><a href="{ver}" style="color:var(--gold)">See the full vetting process</a></p></div></section>
+{cta_band(lang, preview, rel, 'Need a hand? Get in touch.', sub='Tell us what you need to arrange and where. We will let you know whether we can help.')}'''
 
 def p_services(lang, preview, rel):
     t = T[lang]; c = link('contact', lang, preview, rel)
@@ -206,8 +227,8 @@ def p_contact(lang, preview, rel):
 <section class="bg-grey"><div class="wrap"><div class="two top"><div><h2>Leave a message</h2><p class="muted">For example: a Thai visa application, opening a bank account or finding help to manage a property. Please also tell us where you need the service.</p>{hs_block(lang, preview, 'zd-contact-form')}</div><div><p class="note">A free 20-minute initial assessment is available for Thai visa applications.</p><p class="note">For partnership enquiries, please include your firm's name, service locations and areas of expertise.</p></div></div></div></section>'''
 
 BUILDERS = dict(index=p_index, services=p_services, verify=p_verify, partners=p_partners, about=p_about, contact=p_contact)
-TITLES = {'zh': dict(index=('ZDelp｜需要幫忙，找 ZDelp。簽證、銀行開戶、房產與公司事務', 'ZDelp Limited（香港註冊）：泰國簽證由 ZDelp 專員直接辦理；銀行開戶、房產與公司事務由經 ZDelp 核驗的可靠持牌機構提供，ZDelp 評估、配對與跟進。'), services=('ZDelp 服務｜泰國簽證、銀行開戶、房產出租與代管、英國置業與公司', '找到需要的服務，查看辦理內容與費用；不確定也可以直接聯絡 ZDelp。'), verify=('ZDelp 核驗制度｜先核驗，再合作', '執照與登記、視訊訪談、試單評估、年度重審；徽章不能付費取得。'), partners=('機構合作｜讓專業，遇見合適需求', '你提供在地專業，ZDelp 負責需求評估、配對與持續跟進。合作條件、加入流程與申請。'), about=('關於 ZDelp｜在地・可靠・同行', 'ZDelp Limited 是於香港註冊的在地服務與協助公司；與宅點是兩間獨立公司，互補協作。'), contact=('聯絡 ZDelp｜你想辦什麼，告訴我們', 'WhatsApp、LINE、電郵或留言；泰國簽證提供 20 分鐘免費初審。')),
-          'en': dict(index=('ZDelp | Need help? Talk to ZDelp. Visas, bank accounts, property and company matters', 'ZDelp Limited (Hong Kong): Thai visas handled directly by ZDelp specialists; bank accounts, property and company matters provided by reliable, licensed firms vetted by ZDelp.'), services=('ZDelp services | Thai visas, bank accounts, property management, UK property and company', 'Find the service you need and check what it covers and what it costs; contact ZDelp if unsure.'), verify=('Our vetting process | Vetted before we work together', 'Licences and registration, video interview, trial cases, annual review; the badge cannot be bought.'), partners=('Partner with ZDelp | Connect your expertise with the right needs', 'You provide local expertise; ZDelp assesses needs, matches and follows up. Requirements, joining process and application.'), about=('About ZDelp | Local. Reliable. With you.', 'ZDelp Limited is a Hong Kong-registered company providing local services and assistance; ZDelp and Zagdim are two independent companies.'), contact=('Contact ZDelp | Tell us what you need help with', 'WhatsApp, LINE, email or leave a message; a free 20-minute assessment for Thai visas.'))}
+TITLES = {'zh': dict(index=('ZDelp｜需要幫忙，找 ZDelp。簽證、銀行開戶、房產與公司事務', 'ZDelp Limited（香港註冊）：一個窗口，聯通全球在地服務。簽證、銀行開戶、房產與公司事務，由 ZDelp 專員或經核驗的持牌機構辦理，ZDelp 評估、安排與持續跟進。'), services=('ZDelp 服務｜泰國簽證、銀行開戶、房產出租與代管、英國置業與公司', '找到需要的服務，查看辦理內容與費用；不確定也可以直接聯絡 ZDelp。'), verify=('ZDelp 核驗制度｜先核驗，再合作', '執照與登記、視訊訪談、試單評估、年度重審；徽章不能付費取得。'), partners=('機構合作｜讓專業，遇見合適需求', '你提供在地專業，ZDelp 負責需求評估、配對與持續跟進。合作條件、加入流程與申請。'), about=('關於 ZDelp｜在地・可靠・同行', 'ZDelp Limited 是於香港註冊的在地服務與協助公司；與宅點是兩間獨立公司，互補協作。'), contact=('聯絡 ZDelp｜你想辦什麼，告訴我們', 'WhatsApp、LINE、電郵或留言；泰國簽證提供 20 分鐘免費初審。')),
+          'en': dict(index=('ZDelp | Need help? Talk to ZDelp. Visas, bank accounts, property and company matters', 'ZDelp Limited (Hong Kong): one contact point for local help worldwide. Visas, bank accounts, property and company matters, handled by ZDelp specialists or vetted, licensed firms, with ZDelp assessing, arranging and following up.'), services=('ZDelp services | Thai visas, bank accounts, property management, UK property and company', 'Find the service you need and check what it covers and what it costs; contact ZDelp if unsure.'), verify=('Our vetting process | Vetted before we work together', 'Licences and registration, video interview, trial cases, annual review; the badge cannot be bought.'), partners=('Partner with ZDelp | Connect your expertise with the right needs', 'You provide local expertise; ZDelp assesses needs, matches and follows up. Requirements, joining process and application.'), about=('About ZDelp | Local. Reliable. With you.', 'ZDelp Limited is a Hong Kong-registered company providing local services and assistance; ZDelp and Zagdim are two independent companies.'), contact=('Contact ZDelp | Tell us what you need help with', 'WhatsApp, LINE, email or leave a message; a free 20-minute assessment for Thai visas.'))}
 
 ORG = {"@context": "https://schema.org", "@type": "Organization", "@id": "https://zdelp.co/#organization", "name": "ZDelp", "legalName": "ZDelp Limited", "url": "https://zdelp.co/", "sameAs": ["https://zagdim.com/zdelp/", "https://www.facebook.com/ZDelpThailifeservice"], "logo": "https://zdelp.co/assets/zdelp.png", "email": "info@zagdim.com", "address": {"@type": "PostalAddress", "addressRegion": "Hong Kong", "addressCountry": "HK"}, "slogan": "Local. Reliable. With you."}
 
@@ -229,7 +250,11 @@ def preview_site():
             t = T[lang]; body = BUILDERS[page](lang, True, '')
             parts.append('<div class="pg" id="%s-%s" lang="%s">%s<main>%s</main>%s</div>' % (lang, page, t['lang'], nav(page, lang, True, ''), body, footer(lang, True, '')))
     router = """<script>function show(){var h=(location.hash||'#zh-index').slice(1);var ok=false;document.querySelectorAll('.pg').forEach(function(p){var on=p.id===h;p.style.display=on?'block':'none';if(on)ok=true;});if(!ok){document.getElementById('zh-index').style.display='block';}window.scrollTo(0,0);document.querySelectorAll('section .wrap>*').forEach(function(el){el.classList.add('in')});}window.addEventListener('hashchange',show);show();</script>"""
-    return '<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>zdelp.co 全站預覽 v2（zh／en）</title><meta name="description" content="zdelp.co 六頁雙語預覽 v2（Codex 文案）：導覽列切頁、右上 EN／中文切換。">%s<style>\n%s\n.pg{display:none}.mockbar{background:#EEBF01;color:#10374e;font-size:13px;font-weight:700;text-align:center;padding:6px}\n</style></head><body><div class="mockbar">zdelp.co 全站預覽 v2 · 導覽列切頁 · 右上 EN／中文切換 · 圖片暫用</div>%s%s</body></html>' % (FONTS, CSS, ''.join(parts), router)
+    return '<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>zdelp.co 全站預覽 v3（zh／en）</title><meta name="description" content="zdelp.co 六頁雙語預覽 v2（Codex 文案）：導覽列切頁、右上 EN／中文切換。">%s<style>\n%s\n.pg{display:none}.mockbar{background:#EEBF01;color:#10374e;font-size:13px;font-weight:700;text-align:center;padding:6px}\n</style></head><body><div class="mockbar">zdelp.co 全站預覽 v3 · 導覽列切頁 · 右上 EN／中文切換 · 圖片暫用</div>%s%s</body></html>' % (FONTS, CSS, ''.join(parts), router)
+
+def abs_links(h):
+    h = h.replace('href="index.html"', 'href="/"').replace('href="en/index.html"', 'href="/en/"')
+    return re.sub(r'href="(%s)\.html"' % '|'.join(PAGES[1:]), r'href="/\1.html"', h)
 
 def gate_text(h):
     t = re.sub(r'<style>.*?</style>', '', h, flags=re.S); t = re.sub(r'<script.*?</script>', '', t, flags=re.S)
@@ -246,4 +271,12 @@ if __name__ == '__main__':
     for lang in ('zh', 'en'):
         for p in PAGES:
             io.open(os.path.join(ROOT, 'preview', 'gate-%s-%s.md' % (lang, p)), 'w', encoding='utf-8').write(gate_text(page_html(p, lang, False, '')))
-    print('built dist/ (zh+en) + preview/site.html')
+    # 部署附檔（每次建置重生）
+    import datetime; today = datetime.date.today().isoformat()
+    io.open(os.path.join(D, 'robots.txt'), 'w').write('User-agent: *\nAllow: /\nSitemap: https://zdelp.co/sitemap.xml\n')
+    urls = ['https://zdelp.co/'] + ['https://zdelp.co/%s.html' % p for p in PAGES[1:]] + ['https://zdelp.co/en/'] + ['https://zdelp.co/en/%s.html' % p for p in PAGES[1:]]
+    io.open(os.path.join(D, 'sitemap.xml'), 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join('  <url><loc>%s</loc><lastmod>%s</lastmod></url>\n' % (u, today) for u in urls) + '</urlset>\n')
+    io.open(os.path.join(D, 'CNAME'), 'w').write('zdelp.co\n'); io.open(os.path.join(D, '.nojekyll'), 'w').write('')
+    nf = '<section class="hero sm"><div class="wrap"><h1>找不到這個頁面。</h1><p class="lead">網址可能已更改。請回到首頁，或直接聯絡 ZDelp。</p><div class="actions"><a class="btn btn-gold" href="/">回首頁</a><a class="btn btn-ghost" href="/contact.html">聯絡 ZDelp</a></div></div></section>'
+    io.open(os.path.join(D, '404.html'), 'w', encoding='utf-8').write('<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>找不到頁面｜ZDelp</title><meta name="robots" content="noindex">%s<style>\n%s\n</style></head><body>%s<main>%s</main>%s</body></html>' % (FONTS, CSS, abs_links(nav('index', 'zh', False, '/')), nf, abs_links(footer('zh', False, '/'))))
+    print('built dist/ (zh+en) + preview/site.html + robots/sitemap/CNAME/404')
