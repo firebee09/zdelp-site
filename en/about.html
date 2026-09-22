@@ -1,0 +1,218 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>About ZDelp | Local. Reliable. With you.</title><meta name="description" content="ZDelp Limited is a Hong Kong-registered company providing local services and assistance; ZDelp and Zagdim are two independent companies."><link rel="alternate" hreflang="zh-Hant" href="https://zdelp.co/about.html"><link rel="alternate" hreflang="en" href="https://zdelp.co/en/about.html"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap"><style>
+:root{--navy:#10374E;--navy-2:#0B2334;--navy-3:#163F5A;--teal:#179193;--dteal:#0F6E70;--lteal:#E4F3F3;--gold:#EEBF01;--lgrey:#F2F5F7;--grey:#cccccc;--line:#DEE5EA;--text:#152A38;--muted:#526779;--white:#fff;
+ --fs:18px;--h1:clamp(44px,5.4vw,76px);--h1s:clamp(36px,4.2vw,56px);--h2:clamp(30px,3.2vw,44px);--h3:22px;--lead:clamp(19px,1.5vw,22px);--nav-h:88px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--white);color:var(--text);font-family:Inter,"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;font-size:var(--fs);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit}p{margin:0}img{max-width:100%}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:"Noto Sans TC",Inter,sans-serif;color:var(--navy);margin:0;line-height:1.15;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1);font-weight:900}
+h2{font-size:var(--h2);font-weight:900}
+h3{font-size:var(--h3);font-weight:800;line-height:1.35}
+.muted{color:var(--muted);margin:16px 0 26px;font-size:calc(var(--fs) + 1px)}
+.note{font-size:15px;color:var(--muted);margin-top:18px}
+.note a{color:var(--dteal);font-weight:700}
+.kick{font-family:Inter,sans-serif;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.kick::before{content:"";width:28px;height:4px;background:var(--gold);border-radius:2px;flex:none}
+/* nav */
+.nav{position:sticky;top:0;z-index:40;background:var(--navy);color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.08)}
+.nav .wrap{display:flex;align-items:center;gap:28px;height:var(--nav-h);position:relative}
+.logo{display:flex;align-items:center;gap:14px;text-decoration:none;font-weight:900;font-size:30px;color:#fff;letter-spacing:.01em;font-family:Inter,sans-serif}
+.nav-logo{width:52px;height:52px;border-radius:12px;display:block;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.logo span{display:flex;flex-direction:column;line-height:1}
+.logo small{display:block;font-size:11px;letter-spacing:.24em;color:var(--gold);font-weight:700;margin-top:6px}
+.links{display:flex;gap:30px;margin-left:auto}
+.links a{text-decoration:none;font-size:17px;font-weight:600;color:rgba(255,255,255,.86);padding:8px 0;border-bottom:3px solid transparent;white-space:nowrap}
+.links a:hover,.links a.on{color:#fff;border-bottom-color:var(--gold)}
+.lang{font-size:13.5px;font-weight:700;color:#fff;text-decoration:none;border:1.5px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 13px;white-space:nowrap}
+.lang:hover{border-color:var(--gold);color:var(--gold)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:12px;font-weight:800;text-decoration:none;font-size:17px;border:2px solid transparent;transition:transform .18s,box-shadow .18s;white-space:nowrap;font-family:"Noto Sans TC",Inter,sans-serif}
+.btn:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(0,0,0,.18)}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-teal{background:var(--teal);color:#fff}
+.btn-line{border-color:#fff;color:var(--navy);background:#fff}
+.btn-ghost{border-color:rgba(255,255,255,.55);color:#fff;background:transparent}
+.btn-xl{padding:18px 32px;font-size:19px;border-radius:14px}
+.nav-cta{padding:11px 20px;font-size:15.5px}
+.burger{display:none;margin-left:auto;width:44px;height:44px;border:1.5px solid rgba(255,255,255,.35);border-radius:10px;background:transparent;color:#fff;cursor:pointer;padding:0;place-items:center}
+.burger span{display:block;width:20px;height:2px;background:#fff;box-shadow:0 -6px 0 #fff,0 6px 0 #fff;border-radius:2px}
+.burger:focus-visible,.links a:focus-visible,.btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+@media(max-width:960px){
+ .links{display:none;position:absolute;left:0;right:0;top:var(--nav-h);background:var(--navy-2);flex-direction:column;gap:0;padding:8px 24px 16px;margin:0;box-shadow:0 20px 40px rgba(0,0,0,.3)}
+ .links.open{display:flex}
+ .links a{font-size:18px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+ .burger{display:grid}.lang{margin-left:0}
+ .nav .wrap{gap:14px}
+}
+@media(max-width:520px){.nav-cta{display:none}.logo small{display:none}.logo{font-size:26px}.nav-logo{width:44px;height:44px}:root{--nav-h:72px}}
+/* hero (all pages: navy) */
+.hero{background:var(--navy);color:#fff;position:relative;overflow:hidden;padding:64px 0 72px}
+.hero::after{content:"ZDelp";position:absolute;right:-.06em;bottom:-.28em;font-family:Inter,sans-serif;font-weight:900;font-size:clamp(160px,22vw,340px);line-height:1;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.07);pointer-events:none;user-select:none}
+.hero .wrap{position:relative;z-index:1}
+.hero.sm{padding:56px 0 60px}
+.hero.sm::after{font-size:clamp(120px,16vw,240px)}
+.hero.sm h1{font-size:var(--h1s)}
+.hero.sm .lead{max-width:60ch}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero h1{color:#fff}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero .kick{color:var(--gold)}
+.lead{font-size:var(--lead);color:rgba(255,255,255,.84);margin:24px 0 32px;max-width:36ch;line-height:1.6}
+.actions{display:flex;gap:14px;flex-wrap:wrap}
+.hero.sm .actions{margin-top:0}
+.trust{display:flex;gap:26px;flex-wrap:wrap;margin-top:40px;padding-top:26px;border-top:1px solid rgba(255,255,255,.16);font-size:15.5px;color:rgba(255,255,255,.86)}
+.trust span{display:flex;align-items:center;gap:9px}
+.trust i{width:22px;height:22px;border-radius:50%;background:var(--gold);color:var(--navy);display:grid;place-items:center;font-style:normal;font-weight:900;font-size:13px;flex:none}
+.hero-art{position:relative;padding:0 0 26px 26px}
+.hero-art::before{content:"";position:absolute;left:0;bottom:0;right:26px;top:26px;border:3px solid var(--gold);border-radius:22px;clip-path:polygon(0 0,100% 0,100% 100%,14% 100%)}
+.hero-art img{position:relative;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:20px;box-shadow:0 30px 60px rgba(0,0,0,.35)}
+.hero-cap{position:absolute;left:0;bottom:0;background:#fff;color:var(--navy);border-radius:14px;padding:12px 16px;box-shadow:0 12px 30px rgba(0,0,0,.25);display:flex;align-items:center;gap:12px;font-size:14.5px;font-weight:700}
+.hero-cap b{display:block;font-family:Inter,sans-serif;font-size:11px;letter-spacing:.18em;color:var(--teal);font-weight:800}
+.hero-cap i{width:34px;height:34px;border-radius:50%;background:var(--lteal);color:var(--dteal);display:grid;place-items:center;font-style:normal;font-weight:900}
+@media(max-width:960px){.hero-grid{grid-template-columns:1fr;gap:36px}.hero{padding:48px 0 56px}.hero::after{font-size:150px}}
+/* sections */
+section{padding:88px 0}
+.bg-grey{background:var(--lgrey)}
+.bg-navy{background:var(--navy);color:#fff}
+.bg-navy h2,.bg-navy h3{color:#fff}
+.bg-navy .kick{color:var(--gold)}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:36px;flex-wrap:wrap}
+.head p{color:var(--muted);max-width:52ch;font-size:calc(var(--fs) + 1px)}
+.bg-navy .head p{color:rgba(255,255,255,.78)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.two.top{align-items:start}
+@media(max-width:800px){.two{grid-template-columns:1fr;gap:36px}}
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.cards.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.cards.three-text{grid-template-columns:repeat(3,minmax(0,1fr))}
+.card{background:#fff;border:1.5px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:transform .18s,box-shadow .18s}
+@media(hover:hover){.card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(16,55,78,.12)}}
+.card-img{display:block;aspect-ratio:3/1;overflow:hidden;background:var(--navy-2)}
+.card-img img{width:100%;height:100%;object-fit:cover;display:block}
+.card .b{padding:20px 22px 22px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card.pend{background:var(--lteal);border-color:transparent}
+.card.pend .b{padding:28px 26px 30px}
+.badge{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;padding:5px 11px;border-radius:999px;letter-spacing:.03em;width:max-content;max-width:100%}
+.badge.own{background:var(--navy);color:#fff}
+.badge.ver{background:var(--lteal);color:var(--dteal)}
+.badge i{font-style:normal;font-size:11px}
+.card p{font-size:16px;color:var(--muted);line-height:1.6}
+.card .more{margin-top:auto;font-weight:800;color:var(--dteal);text-decoration:none;font-size:16px;padding-top:8px}
+.card .more:hover{color:var(--navy)}
+.card .ext{display:block;font-size:12.5px;color:var(--muted)}
+@media(max-width:960px){.cards,.cards.four,.cards.three-text{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.cards,.cards.four,.cards.three-text{grid-template-columns:1fr}}
+/* flow (home) */
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.fl{background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:26px 24px 28px}
+.fl i{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--gold);color:var(--navy);font-style:normal;font-weight:900;font-family:Inter,sans-serif;font-size:18px;margin-bottom:16px}
+.fl b{display:block;font-family:"Noto Sans TC",sans-serif;font-size:21px;color:var(--navy);margin-bottom:6px}
+.fl p{font-size:16px;color:var(--muted);line-height:1.6}
+@media(max-width:900px){.flow{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.flow{grid-template-columns:1fr}}
+/* split (about) */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.split-card{border-radius:20px;padding:34px 34px 36px;border:1.5px solid var(--line);background:#fff}
+.split-card.own{background:var(--navy);border-color:var(--navy)}
+.split-card.own h3{color:#fff}
+.split-card.ver{background:var(--lteal);border-color:transparent}
+.split-card h3{margin-top:18px;font-size:clamp(20px,1.8vw,24px);line-height:1.45;font-weight:700}
+.split-card .badge.own{background:var(--gold);color:var(--navy)}
+.split-note{margin-top:22px;font-size:calc(var(--fs) + 1px);color:var(--muted);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.split-note a{color:var(--dteal);font-weight:800;text-decoration:none;border-bottom:2px solid var(--gold)}
+@media(max-width:700px){.split{grid-template-columns:1fr}}
+/* on the ground (home) */
+.ground{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.ground-photo{position:relative;border-radius:20px;overflow:hidden;background:var(--navy-2);margin:0;aspect-ratio:4/3}
+.ground-photo img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0}
+.ground-photo figcaption{position:absolute;left:18px;bottom:18px;right:18px;background:rgba(11,35,52,.84);backdrop-filter:blur(6px);color:#fff;border-radius:14px;padding:14px 18px;font-size:15px}
+.ground-photo figcaption b{display:block;font-size:12px;letter-spacing:.18em;color:var(--gold);font-family:Inter,sans-serif}
+.ground-text p{color:var(--muted);font-size:calc(var(--fs) + 1px);margin:18px 0 0}
+.ground-text .split-note{margin-top:26px}
+@media(max-width:900px){.ground{grid-template-columns:1fr}}
+/* vetting band (home) */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:26px;margin-top:8px}
+.step{border-top:3px solid rgba(255,255,255,.16);padding-top:22px;position:relative}
+.step::before{content:"";position:absolute;left:0;top:-3px;width:56px;height:3px;background:var(--gold)}
+.step i{display:block;font-family:Inter,sans-serif;font-style:normal;font-weight:900;font-size:54px;line-height:1;color:transparent;-webkit-text-stroke:1.5px var(--gold);margin-bottom:14px}
+.step b{display:block;font-family:"Noto Sans TC",sans-serif;font-size:21px;margin-bottom:8px}
+.step p{font-size:16px;color:rgba(255,255,255,.78)}
+@media(max-width:900px){.steps{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.steps{grid-template-columns:1fr}}
+.seal-line{margin-top:44px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;background:var(--navy-3);border-radius:18px;padding:22px 26px}
+.seal-line .ring{width:64px;height:64px;border-radius:50%;border:5px solid var(--gold);display:grid;place-items:center;font-family:Inter,sans-serif;font-weight:900;font-size:24px;flex:none}
+.seal-line b{font-family:"Noto Sans TC",sans-serif;font-size:21px}
+.seal-line p{color:rgba(255,255,255,.8);font-size:16px;max-width:60ch}
+/* verify page */
+.checks{display:grid;gap:16px}
+.checks.four{grid-template-columns:1fr 1fr}
+.check{display:flex;gap:16px;background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:22px 24px}
+.check i{flex:none;width:40px;height:40px;border-radius:50%;background:var(--gold);color:var(--navy);display:grid;place-items:center;font-style:normal;font-weight:900;font-family:Inter,sans-serif}
+.check b{display:block;color:var(--navy);margin-bottom:4px;font-size:20px;font-family:"Noto Sans TC",sans-serif}
+.check p{font-size:16px;color:var(--muted)}
+@media(max-width:760px){.checks.four{grid-template-columns:1fr}}
+.seal{background:#fff;border:1.5px solid var(--line);border-radius:22px;padding:34px;text-align:center}
+.seal .ring{width:128px;height:128px;border-radius:50%;margin:0 auto 18px;border:7px solid var(--gold);display:grid;place-items:center;color:var(--navy);font-weight:900;font-size:40px;font-family:Inter,sans-serif}
+.seal b{display:block;font-size:22px;color:var(--navy);font-family:"Noto Sans TC",sans-serif}
+.seal p{font-size:15.5px;color:var(--muted);margin:8px 0 0}
+/* partners */
+.pro-list{display:grid;gap:12px;margin:18px 0 22px}
+.pro-list div{display:flex;gap:14px;font-size:calc(var(--fs) - 1px);align-items:flex-start}
+.pro-list b{flex:none;width:30px;height:30px;border-radius:9px;background:var(--gold);color:var(--navy);display:grid;place-items:center;font-size:14px;font-family:Inter,sans-serif;margin-top:2px}
+/* tables, faq, channels, forms */
+.tbl{width:100%;border-collapse:collapse;margin-top:18px;font-size:calc(var(--fs) - 1px)}
+.tbl td{padding:12px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl td:first-child{color:var(--muted);width:34%}
+.faq{display:grid;grid-template-columns:1fr 1fr;gap:0 40px}
+.faq details{border-top:1px solid var(--line);padding:4px 0}
+.faq summary{cursor:pointer;list-style:none;padding:16px 34px 16px 0;font-weight:700;color:var(--navy);position:relative;font-size:calc(var(--fs) + 1px);font-family:"Noto Sans TC",sans-serif}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:4px;top:12px;color:var(--teal);font-size:24px;font-family:Inter,sans-serif}
+.faq details[open] summary::after{content:"−"}
+.faq details p{font-size:calc(var(--fs) - 1px);color:var(--muted);margin:0 0 18px;line-height:1.7}
+@media(max-width:760px){.faq{grid-template-columns:1fr}}
+.channels{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+.channels.inline{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:0;max-width:820px}
+.channels.inline .ch{text-align:center}
+.ch{display:block;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:16px 18px;text-decoration:none;color:var(--text)}
+.ch b{display:block;color:var(--navy);margin-bottom:2px;font-size:17px}
+.ch span{font-size:14.5px;color:var(--muted)}
+a.ch:hover{border-color:var(--gold)}
+@media(max-width:640px){.channels.inline{grid-template-columns:1fr}}
+.hs{background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:18px 20px;min-height:320px}
+.form-mock{background:#fff;border:1.5px dashed var(--grey);border-radius:18px;padding:60px 20px;text-align:center;color:var(--muted);font-size:15px}
+.strip-note{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;margin-top:26px;background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:20px 22px}
+.strip-note p{font-size:calc(var(--fs) - 1px);color:var(--text);max-width:720px}
+.strip-note .btn-line{border-color:var(--navy)}
+section.tiny{padding:18px 0 40px}
+/* cta band */
+.cta-band{background:var(--lgrey);padding:88px 0;text-align:center}
+.cta-band .wrap{display:flex;flex-direction:column;align-items:center;gap:0}
+.cta-band p{font-size:clamp(32px,4vw,52px);font-weight:900;font-family:"Noto Sans TC",sans-serif;color:var(--navy);line-height:1.2;letter-spacing:-.015em;text-wrap:balance}
+.cta-band small{display:block;font-size:var(--lead);font-weight:400;color:var(--muted);margin:16px auto 0;max-width:40ch;line-height:1.6}
+.cta-band .btn{margin-top:32px;padding:18px 32px;font-size:19px;border-radius:14px}
+/* footer */
+footer{background:var(--navy-2);color:rgba(255,255,255,.82);padding:48px 0 32px;font-size:15px}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px}
+.foot b{display:block;color:var(--gold);margin-bottom:10px;font-size:16px}
+.foot a{color:#fff}
+.foot-links a{text-decoration:none;margin-right:14px;white-space:nowrap}
+.foot-links a:hover{text-decoration:underline}
+.legal{margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14);font-size:13px;color:rgba(255,255,255,.55);line-height:1.7}
+@media(max-width:760px){.foot{grid-template-columns:1fr}}
+/* reveal */
+html.anim section .wrap>*{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
+html.anim section .wrap>.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html.anim section .wrap>*{opacity:1;transform:none;transition:none}*{transition:none!important}}
+/* footer partner entry (B2B, quiet) */
+.foot-partner{display:inline-block;margin-top:10px;font-size:13.5px;color:rgba(255,255,255,.6)!important;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25)}
+.foot-partner:hover{color:#fff!important}
+
+</style></head><body><header class="nav"><div class="wrap"><a class="logo" href="index.html"><img src="../assets/zdelp.png" alt="ZDelp" class="nav-logo"><span>ZDelp<small>LOCAL ASSISTANCE</small></span></a><nav class="links" id="zd-links"><a href="index.html">Home</a><a href="services.html">Services</a><a href="verify.html">Trust & Protection</a><a class="on" href="about.html">About ZDelp</a><a href="contact.html">Contact</a></nav><button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="zd-links" onclick="var l=this.parentNode.querySelector('.links');var o=l.classList.toggle('open');this.setAttribute('aria-expanded',o)"><span></span></button><a class="lang" href="../about.html" hreflang="zh-Hant">中文</a><a class="btn btn-gold nav-cta" href="contact.html">Contact ZDelp</a></div></header><main>
+<section class="hero sm"><div class="wrap"><h1>Local. Reliable. With you.</h1><p class="lead">ZDelp Limited is a Hong Kong-registered company providing local services and assistance.<br>From Thai visas to bank accounts, property and company matters, you can contact ZDelp directly about the help you need.</p></div></section>
+<section class="bg-grey"><div class="wrap"><div class="head"><div><h2>Who provides the service</h2></div></div><div class="split"><div class="split-card own"><span class="badge own"><i>●</i>Handled directly by ZDelp specialists</span><h3>ZDelp specialists provide application assistance and handling for Thai visas.</h3></div><div class="split-card ver"><span class="badge ver"><i>✓</i>Handled by local firms and professionals</span><h3>Other services are handled by local firms and professionals assessed by ZDelp. ZDelp assesses your needs, arranges the service and follows up.</h3></div></div></div></section>
+<section><div class="wrap"><div class="two"><div><h2>Company details</h2><table class="tbl"><tr><td>Company</td><td>ZDelp Limited</td></tr><tr><td>Registered in</td><td>Hong Kong</td></tr><tr><td>Website</td><td>zdelp.co</td></tr><tr><td>Email</td><td>info@zagdim.com</td></tr></table></div><div><h2>Working with Zagdim</h2><p class="muted">ZDelp and Zagdim are two independent companies that collaborate in complementary areas. Zagdim's role is research and content; ZDelp's role is local services and assistance. Some service details are published on Zagdim, with service enquiries handled by ZDelp.</p></div></div></div></section>
+<section class="bg-grey"><div class="wrap"><div class="head"><div><h2>Frequently asked questions</h2></div></div><div class="faq"><details><summary>Does ZDelp handle every service directly?</summary><p>ZDelp specialists handle Thai visa applications directly. Other services are handled by local firms and professionals assessed by ZDelp, with ZDelp assessing needs, arranging the service and following up. Each service indicates who handles the work.</p></details><details><summary>Can I still contact ZDelp after the service is arranged?</summary><p>Yes. ZDelp continues to follow up and assists with communication and coordination during the service.</p></details><details><summary>Can I get in touch if I am unsure which service I need?</summary><p>Yes. Tell us what you need help with, and we will explain what assistance we can offer.</p></details></div></div></section>
+<section class="cta-band"><div class="wrap"><div><p>Need help? Talk to ZDelp.</p></div><a class="btn btn-gold" href="contact.html">Contact ZDelp</a></div></section></main><footer><div class="wrap"><div class="foot"><div><b>ZDelp Limited</b><p>Registered in Hong Kong<br>Local. Reliable. With you.</p></div><div><b>Site</b><p class="foot-links"><a href="services.html">Services</a><a href="verify.html">Trust & Protection</a><a href="about.html">About ZDelp</a><a href="contact.html">Contact</a><br><a class="foot-partner" href="partners.html">Local firms and professionals: join ZDelp</a></p></div><div><b>Contact</b><p><a href="https://wa.me/message/K7CHUBLJY4ONN1" target="_blank" rel="noopener">WhatsApp</a> · <a href="https://line.me/R/ti/p/@257ziphh" target="_blank" rel="noopener">LINE</a> · <a href="mailto:info@zagdim.com">info@zagdim.com</a></p></div></div><p class="legal">Thai visa applications are handled directly by ZDelp specialists. Other services are handled by local firms and professionals assessed by ZDelp. ZDelp assesses your needs, arranges the service and follows up.</p><p class="legal">Content on this site is general information only and does not constitute tax, legal or investment advice. Requirements and fees are set out in the relevant service details and individual quotation, and are subject to confirmation by ZDelp or the firm; visa decisions are made by the relevant government authorities and account opening decisions by the bank. ZDelp does not guarantee any outcome.</p></div></footer><script>(function(){if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;document.documentElement.classList.add('anim');var els=[].slice.call(document.querySelectorAll('section .wrap>*'));var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.06});els.forEach(function(el){io.observe(el)});setTimeout(function(){els.forEach(function(el){el.classList.add('in')})},4000)})();</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "@id": "https://zdelp.co/#organization", "name": "ZDelp", "legalName": "ZDelp Limited", "url": "https://zdelp.co/", "sameAs": ["https://zagdim.com/zdelp/", "https://www.facebook.com/ZDelpThailifeservice"], "logo": "https://zdelp.co/assets/zdelp.png", "email": "info@zagdim.com", "address": {"@type": "PostalAddress", "addressRegion": "Hong Kong", "addressCountry": "HK"}, "slogan": "Local. Reliable. With you."}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does ZDelp handle every service directly?", "acceptedAnswer": {"@type": "Answer", "text": "ZDelp specialists handle Thai visa applications directly. Other services are handled by local firms and professionals assessed by ZDelp, with ZDelp assessing needs, arranging the service and following up. Each service indicates who handles the work."}}, {"@type": "Question", "name": "Can I still contact ZDelp after the service is arranged?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. ZDelp continues to follow up and assists with communication and coordination during the service."}}, {"@type": "Question", "name": "Can I get in touch if I am unsure which service I need?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Tell us what you need help with, and we will explain what assistance we can offer."}}]}</script></body></html>
