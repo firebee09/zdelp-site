@@ -2,9 +2,20 @@
 """zdelp.co 全站建置 v3（2026-09-21：v2 Codex 文案＋v3 設計「一個窗口，聯通全球」；zh/en 雙語可切換；手機選單）。
 輸出：dist/{index,services,verify,partners,about,contact}.html ＋ dist/en/…（相對 assets）；
 preview/site.html（單檔、data-URI、hash 切頁，給 Artifact）；preview/gate-<lang>-<page>.md。"""
-import io, os, re, base64, json, html, shutil
+import io, os, re, sys, glob, base64, json, html, shutil
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 A = os.path.join(ROOT, 'assets')
+PROFILE_SKILL = os.path.expanduser('~/.claude/skills/produce-zdelp-provider-profile')
+sys.path.insert(0, os.path.join(PROFILE_SKILL, 'scripts'))
+import build_profile as BP  # 名片頁產生器（共用，正本在 skill 裡；此處只併頁不改邏輯）
+
+def load_providers():
+    out = []
+    for f in sorted(glob.glob(os.path.join(PROFILE_SKILL, 'examples', '*.json'))):
+        out.append(json.load(io.open(f, encoding='utf-8')))
+    out.sort(key=lambda d: (d.get('category') or '', d.get('name') or ''))
+    return out
+PROVIDERS = load_providers()
 LOGO_ALT = 'ZDelp'
 CSS = io.open(os.path.join(ROOT, 'src', 'zdelp.css'), encoding='utf-8').read()
 FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap">'
@@ -49,21 +60,25 @@ def link(page, lang, preview, rel, anchor=''):
     if preview: return '#%s-%s' % (lang, page)
     return page + '.html' + anchor
 
-def nav(active, lang, preview, rel):
+# page_prefix：預設 ''（沿用既有 zh／en 六頁與 preview 行為，不受影響）。
+# providers/<slug>.html 這類巢狀一層的頁面才傳 '../'，讓 nav／footer 連回站台其他頁面時補上正確相對路徑
+# （rel 本身只管 img() 的 assets/ 路徑；六頁與 en/ 六頁彼此是同層檔案，本來不需要靠 rel 連頁，故沿用舊行為不動 link()）。
+def nav(active, lang, preview, rel, page_prefix=''):
     t = T[lang]
-    items = ''.join('<a%s href="%s">%s</a>' % (' class="on"' if p == active else '', link(p, lang, preview, rel), n) for p, n in zip(NAV_PAGES, t['nav']))
+    items = ''.join('<a%s href="%s">%s</a>' % (' class="on"' if p == active else '', page_prefix + link(p, lang, preview, rel), n) for p, n in zip(NAV_PAGES, t['nav']))
     other = 'en' if lang == 'zh' else 'zh'
-    sw = ('#%s-%s' % (other, active)) if preview else (('en/' if other == 'en' else '../') + active + '.html')
+    sw_page = active if active in PAGES else 'index'
+    sw = ('#%s-%s' % (other, active)) if preview else (page_prefix + ('en/' if other == 'en' else '../') + sw_page + '.html')
     logo = img('zdelp.png', 'ZDelp', 'nav-logo', preview, True, rel)
     menu_label = '選單' if lang == 'zh' else 'Menu'
     return ('<header class="nav"><div class="wrap"><a class="logo" href="%s">%s<span>ZDelp<small>%s</small></span></a><nav class="links" id="zd-links">%s</nav>'
             '<button class="burger" type="button" aria-label="%s" aria-expanded="false" aria-controls="zd-links" onclick="var l=this.parentNode.querySelector(\'.links\');var o=l.classList.toggle(\'open\');this.setAttribute(\'aria-expanded\',o)"><span></span></button>'
             '<a class="lang" href="%s" hreflang="%s">%s</a><a class="btn btn-gold nav-cta" href="%s">%s</a></div></header>') % (
-            link('index', lang, preview, rel), logo, t['tag'], items, menu_label, sw, 'en' if other == 'en' else 'zh-Hant', t['sw'], link('contact', lang, preview, rel), t['cta'])
+            page_prefix + link('index', lang, preview, rel), logo, t['tag'], items, menu_label, sw, 'en' if other == 'en' else 'zh-Hant', t['sw'], page_prefix + link('contact', lang, preview, rel), t['cta'])
 
-def footer(lang, preview, rel):
+def footer(lang, preview, rel, page_prefix=''):
     t = T[lang]
-    links = ''.join('<a href="%s">%s</a>' % (link(p, lang, preview, rel), n) for p, n in zip(NAV_PAGES[1:], t['nav'][1:])) + '<br><a class="foot-partner" href="%s">%s</a>' % (link('partners', lang, preview, rel), t['partner_link'])
+    links = ''.join('<a href="%s">%s</a>' % (page_prefix + link(p, lang, preview, rel), n) for p, n in zip(NAV_PAGES[1:], t['nav'][1:])) + '<br><a class="foot-partner" href="%s">%s</a>' % (page_prefix + link('partners', lang, preview, rel), t['partner_link'])
     return ('<footer><div class="wrap"><div class="foot"><div><b>ZDelp Limited</b><p>%s<br>%s</p></div><div><b>%s</b><p class="foot-links">%s</p></div>'
             '<div><b>%s</b><p><a href="%s" target="_blank" rel="noopener">WhatsApp</a> · <a href="%s" target="_blank" rel="noopener">LINE</a> · <a href="%s">info@zagdim.com</a></p></div></div>'
             '<p class="legal">%s</p><p class="legal">%s</p></div></footer>') % (
@@ -242,6 +257,44 @@ def page_html(page, lang, preview, rel):
     return '<!doctype html><html lang="%s"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>%s</title><meta name="description" content="%s">%s%s<style>\n%s\n</style></head><body>%s<main>%s</main>%s%s</body></html>' % (
         t['lang'], html.escape(title), html.escape(desc), alt, FONTS, CSS, nav(page, lang, preview, rel), body, footer(lang, preview, rel), scripts)
 
+# ---------------- 名片頁併入（內部預覽，2026-09-22）----------------
+# 資料正本在 skill produce-zdelp-provider-profile/examples/；本檔只負責併頁（nav／foot／CSS 共用、logo 改檔案）。
+# 全數尚未通過 --public 三項評估與具名同意，頁面標 noindex＋MOCK 條，不進 sitemap；上線條件由 Fiamma 拍板。
+def p_providers_list():
+    groups = {}
+    for d in PROVIDERS:
+        groups.setdefault(d.get('category') or '其他', []).append(d)
+    body = ''
+    for cat, items in groups.items():
+        cards = ''
+        for d in items:
+            zs = d.get('zdelp_score') or {}
+            score = ('<div class="pv-score"><b>%s</b>%s</div>' % (html.escape(str(zs['score'])), BP.stars(zs['score']))) if zs.get('score') else ''
+            cards += ('<a class="pv-card" href="providers/%s.html"><div class="pv-logo"><img src="assets/providers/%s.png" alt="%s 標誌"></div>'
+                      '<div class="pv-b"><b>%s</b><span>%s</span>%s</div></a>') % (
+                      d['slug'], d['slug'], html.escape(d['name']), html.escape(d['name']),
+                      html.escape('・'.join(x for x in [d.get('country'), d.get('city')] if x)), score)
+        body += '<div class="pv-group"><h2>%s</h2><div class="pv-grid">%s</div></div>' % (html.escape(cat), cards)
+    note = '內部預覽：以下為已建檔的在地機構與專業人士，尚未通過 ZDelp 三項評估（身分與資格核對・訪談・實際評估）與具名同意，暫不對外公開；同一服務類別滿 3 家才會開放該類別名單。'
+    return ('<section class="hero sm"><div class="wrap"><h1>在地機構與專業人士</h1>'
+            '<p class="lead">ZDelp 評估過的在地機構與專業人士，安排前你會先看到是誰。</p></div></section>'
+            '<section class="bg-grey"><div class="wrap"><div class="pv-note">%s</div>%s</div></section>') % (note, body)
+
+def _provider_wrap(body, title, desc):
+    return ('<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
+            '<title>%s</title><meta name="description" content="%s"><meta name="robots" content="noindex">%s<style>\n%s%s\n</style></head><body>%s<main>%s</main>%s%s</body></html>') % (
+            html.escape(title), html.escape(desc), FONTS, CSS, BP.EXTRA, nav('providers', 'zh', False, ''), body, footer('zh', False, ''), ANIM)
+
+def providers_list_html():
+    return _provider_wrap(p_providers_list(), 'ZDelp 在地機構與專業人士名單（內部預覽）', '已建檔在地機構與專業人士，尚未公開，等待 Fiamma 核可上線條件。')
+
+def provider_page_html(d):
+    body = BP.build(d, embed=True, rel='../')
+    return ('<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
+            '<title>%s 名片頁｜ZDelp（內部預覽）</title><meta name="description" content="%s"><meta name="robots" content="noindex">%s<style>\n%s%s\n</style></head><body>%s<main>%s</main>%s%s</body></html>') % (
+            html.escape(d['name']), html.escape('%s・%s・%s（尚未公開，內部預覽）' % (d['name'], d.get('category') or '', d.get('country') or '')),
+            FONTS, CSS, BP.EXTRA, nav('providers', 'zh', False, '../', page_prefix='../'), body, footer('zh', False, '../', page_prefix='../'), ANIM)
+
 def preview_site():
     parts = []
     for lang in ('zh', 'en'):
@@ -267,6 +320,13 @@ if __name__ == '__main__':
         io.open(os.path.join(D, page + '.html'), 'w', encoding='utf-8').write(page_html(page, 'zh', False, ''))
         io.open(os.path.join(D, 'en', page + '.html'), 'w', encoding='utf-8').write(page_html(page, 'en', False, '../'))
     io.open(os.path.join(ROOT, 'preview', 'site.html'), 'w', encoding='utf-8').write(preview_site())
+    # 名片頁（內部預覽，未過 --public 前 noindex；不進 sitemap）
+    os.makedirs(os.path.join(D, 'providers'), exist_ok=True)
+    os.makedirs(os.path.join(D, 'assets', 'providers'), exist_ok=True)
+    for d in PROVIDERS:
+        shutil.copy(os.path.expanduser(d['logo']), os.path.join(D, 'assets', 'providers', d['slug'] + '.png'))
+        io.open(os.path.join(D, 'providers', d['slug'] + '.html'), 'w', encoding='utf-8').write(provider_page_html(d))
+    io.open(os.path.join(D, 'providers.html'), 'w', encoding='utf-8').write(providers_list_html())
     for lang in ('zh', 'en'):
         for p in PAGES:
             io.open(os.path.join(ROOT, 'preview', 'gate-%s-%s.md' % (lang, p)), 'w', encoding='utf-8').write(gate_text(page_html(p, lang, False, '')))
