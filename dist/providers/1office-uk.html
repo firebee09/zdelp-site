@@ -209,6 +209,63 @@ html.anim section .wrap>.in{opacity:1;transform:none}
 /* footer partner entry (B2B, quiet) */
 .foot-partner{display:inline-block;margin-top:10px;font-size:13.5px;color:rgba(255,255,255,.6)!important;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25)}
 .foot-partner:hover{color:#fff!important}
+.foot>div{min-width:0}.foot-links a{display:inline-block}.foot-links a.foot-partner{white-space:normal}
+/* contact page 10-12b: form left, buttons right */
+.contact-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:48px;align-items:start}
+.cbtns{display:flex;flex-direction:column;gap:14px}
+.cbtn{display:flex;align-items:center;gap:16px;width:100%;min-height:76px;box-sizing:border-box;padding:14px 22px;border-radius:14px;color:#fff;text-decoration:none;line-height:1.3;transition:filter .15s}
+.cbtn svg{width:30px;height:30px;flex:none}
+.cbtn b{display:block;font-size:18px;font-weight:800;color:#fff}
+.cbtn small{display:block;font-size:14.5px;color:rgba(255,255,255,.88);overflow-wrap:anywhere}
+.cbtn:hover{filter:brightness(1.07)}
+.cbtn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.cbtn.wa{background:#25D366}.cbtn.line{background:#06C755}.cbtn.mail{background:var(--navy)}
+@media(max-width:800px){.contact-grid{grid-template-columns:1fr;gap:28px}}
+/* promise band: animated network (2026-10-12) */
+.net{background:var(--navy-2);color:#fff;padding:46px 0 50px;position:relative;overflow:hidden;border-top:1px solid rgba(255,255,255,.06)}
+.net-grid{display:grid;grid-template-columns:minmax(300px,410px) 1fr;gap:40px;align-items:center}
+.net-pill{border-left:3px solid rgba(255,255,255,.16);padding:10px 0 12px 20px;opacity:.5;transition:border-color .6s,opacity .6s}
+.net-pill+.net-pill{margin-top:14px}
+.net-pill.on{border-color:var(--gold);opacity:1}
+.net-pill b{display:flex;gap:12px;align-items:baseline;font-family:"Noto Sans TC",Inter,sans-serif;font-weight:900;font-size:21px;line-height:1.35;color:#fff}
+.net-pill b i{font-style:normal;font-family:Inter,sans-serif;font-size:12px;letter-spacing:.14em;color:var(--gold);font-weight:800;flex:none}
+.net-pill p{font-size:15px;color:rgba(255,255,255,.74);margin-top:6px;line-height:1.6;text-wrap:pretty}
+.net-steps{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.net-steps li{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;line-height:1;padding:5px 10px 5px 5px;white-space:nowrap;border-radius:999px;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.72);transition:border-color .4s,color .4s}
+.net-steps li::before{content:"✓";width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.12);color:transparent;display:grid;place-items:center;font-size:11px;font-weight:900;transition:background .4s,color .4s}
+.net-steps li.on{border-color:rgba(238,191,1,.6);color:#fff}
+.net-steps li.on::before{background:var(--gold);color:var(--navy)}
+.net-stage{min-width:0}
+.net-stage svg{display:block;width:100%;height:auto;overflow:visible}
+.net-stage text{font-family:Inter,"Noto Sans TC",sans-serif;font-weight:600;fill:rgba(255,255,255,.88);transition:fill .4s}
+.net-stage text.on{fill:var(--gold);font-weight:800}
+.net-stage text.zn-brand{fill:var(--gold);font-weight:800;letter-spacing:.16em}
+.trust span i{transition:box-shadow .6s,transform .6s}
+.trust span.on i{box-shadow:0 0 0 5px rgba(238,191,1,.22);transform:scale(1.08)}
+html[lang=en] .net-pill b{font-family:Inter,sans-serif;font-weight:800;letter-spacing:-.01em}
+@media(max-width:900px){.net-grid{grid-template-columns:1fr;gap:8px}.net-stage{order:-1;max-width:460px;width:100%;margin:0 auto}.net{padding:22px 0 36px}.net-pill p{font-size:14.5px}}
+@media(max-width:520px){.net-pill b{font-size:19px}}
+
+/* 2026-10-12：動畫移到「怎麼運作」，置中獨立段落，不與頭圖爭主次 */
+.net-how{padding:84px 0 88px;background:radial-gradient(ellipse 70% 60% at 50% 42%,#173f59 0%,var(--navy-2) 70%)}
+.net-head{text-align:center;max-width:760px;margin:0 auto 30px}
+.net-head .kick{color:var(--gold);justify-content:center;display:flex}
+.net-head h2{color:#fff;margin:6px 0 14px}
+.net-head p{color:rgba(255,255,255,.74);font-size:calc(var(--fs) + 1px);line-height:1.7}
+.net-tabs{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:860px;margin:0 auto 10px}
+.net-tabs .net-pill+.net-pill{margin-top:0}
+.net-how .net-stage{max-width:900px;margin:0 auto}
+.net-flow{margin-top:26px}
+.net-flow .fl{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14);transition:border-color .5s,background .5s,transform .5s}
+.net-flow .fl b{color:#fff}
+.net-flow .fl p{color:rgba(255,255,255,.7)}
+.net-flow .fl i{background:rgba(255,255,255,.14);color:#fff;transition:background .5s,color .5s}
+.net-flow .fl.on{border-color:rgba(238,191,1,.7);background:rgba(238,191,1,.07);transform:translateY(-3px)}
+.net-flow .fl.on i{background:var(--gold);color:var(--navy)}
+.net-how .split-note{justify-content:center;color:rgba(255,255,255,.72)}
+.net-how .split-note a{color:#fff}
+@media(max-width:900px){.net-how{padding:52px 0 56px}.net-tabs{grid-template-columns:1fr;gap:12px}.net-how .net-stage{order:0;max-width:520px}.net-flow{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.net-flow{grid-template-columns:1fr}}
 .mockbar{background:var(--gold);color:var(--navy);font-size:13.5px;font-weight:700;text-align:center;padding:8px 16px}
 .crumb{font-size:14px;color:rgba(255,255,255,.7);margin-bottom:22px;display:flex;gap:8px;flex-wrap:wrap}
 .crumb a{color:rgba(255,255,255,.85);text-decoration:none}.crumb span{opacity:.5}
@@ -277,7 +334,7 @@ html.anim section .wrap>.in{opacity:1;transform:none}
 .src{font-size:13.5px;color:var(--muted);margin-top:26px;line-height:1.7}
 .src b{color:var(--dteal)}
 /* v0.2 */
-.pro-tagline{text-wrap:balance;font-size:clamp(19px,1.6vw,23px);color:#fff;margin-top:10px;font-weight:500;line-height:1.5;max-width:34ch}
+.pro-tagline{text-wrap:balance;font-size:clamp(19px,1.6vw,23px);color:#fff;margin-top:10px;font-weight:500;line-height:1.5;max-width:30em}
 .pro-sub{font-size:15px!important;color:rgba(255,255,255,.62)!important}
 .pro-cta{min-width:0!important}
 .head.sub{margin-top:48px;margin-bottom:0}.head.sub.first{margin-top:0}
@@ -335,7 +392,7 @@ html.anim section .wrap>.in{opacity:1;transform:none}
 .notinc b{color:var(--navy);margin-right:8px;font-family:"Noto Sans TC",sans-serif}
 
 /* v1.0 stars horizontal */
-.score .stars{display:inline-flex!important;flex-direction:row!important;gap:2px;font-size:22px}
+.score .stars{display:inline-flex!important;flex-direction:row!important;gap:2px;font-size:22px;color:var(--gold)}
 
 /* v1.1 */
 .score em{font-size:13.5px;color:var(--muted)}
@@ -366,23 +423,30 @@ html.anim section .wrap>.in{opacity:1;transform:none}
 @media(max-width:900px){.pv-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.pv-grid{grid-template-columns:1fr}}
 
-</style></head><body><header class="nav"><div class="wrap"><a class="logo" href="../index.html"><img src="../assets/zdelp.png" alt="ZDelp" class="nav-logo"><span>ZDelp<small>LOCAL ASSISTANCE</small></span></a><nav class="links" id="zd-links"><a href="../index.html">首頁</a><a href="../services.html">服務</a><a href="../verify.html">信任與保障</a><a href="../about.html">關於 ZDelp</a><a href="../contact.html">聯絡</a></nav><button class="burger" type="button" aria-label="選單" aria-expanded="false" aria-controls="zd-links" onclick="var l=this.parentNode.querySelector('.links');var o=l.classList.toggle('open');this.setAttribute('aria-expanded',o)"><span></span></button><a class="lang" href="../en/index.html" hreflang="en">EN</a><a class="btn btn-gold nav-cta" href="../contact.html">聯絡 ZDelp</a></div></header><main><div class="mockbar">MOCK・減法版預覽（1Office）・〔待填〕＝待 Fiamma 提供或確認</div>
+/* v1.9（10-11）：人員區加底色面板；兩個分數並排 */
+.people-panel{margin-top:34px;padding:26px 28px 30px;border-radius:22px;background:linear-gradient(135deg,rgba(14,52,77,.06),rgba(240,190,0,.12));border:1.5px solid var(--line)}
+.people-panel .head.sub{margin-top:0}
+.people-panel .person{background:transparent;border:0;padding:0;align-items:center;text-align:center}
+.scores{display:flex;gap:28px;flex-wrap:wrap;align-items:center}
+
+</style></head><body><header class="nav"><div class="wrap"><a class="logo" href="../index.html"><img src="../assets/zdelp.png" alt="ZDelp" class="nav-logo"><span>ZDelp<small>LOCAL ASSISTANCE</small></span></a><nav class="links" id="zd-links"><a href="../index.html">首頁</a><a href="../services.html">服務</a><a href="../verify.html">信任與保障</a><a href="../about.html">關於我們</a><a href="../contact.html">聯絡</a></nav><button class="burger" type="button" aria-label="選單" aria-expanded="false" aria-controls="zd-links" onclick="var l=this.parentNode.querySelector('.links');var o=l.classList.toggle('open');this.setAttribute('aria-expanded',o)"><span></span></button><a class="lang" href="../en/index.html" hreflang="en">EN</a><a class="btn btn-gold nav-cta" href="../contact.html">聯絡我們</a></div></header><main><div class="mockbar">MOCK・減法版預覽（1Office）・〔待填〕＝待 Fiamma 提供或確認</div>
 <section class="hero sm"><div class="wrap">
 <div class="crumb"><a href="../services.html">服務</a><span>›</span><a href="../providers.html">英國</a><span>›</span><a href="../providers.html">英國公司設立與註冊地址</a></div>
 <div class="pro-hero"><div class="pro-logo"><img src="../assets/providers/1office-uk.png" alt="1Office 標誌"></div>
 <div><span class="badge ver"><i>✓</i>在地機構／專業人士辦理</span><h1 style="margin-top:14px">1Office</h1><p class="pro-tagline">英國有限公司設立、倫敦註冊地址與後續年度申報。</p><p class="pro-sub">1Office Group Ltd ・ 倫敦 City of London</p><div class="tags"><span class="tag"><b>地區</b>英國・倫敦</span><span class="tag"><b>類別</b>英國公司設立與註冊地址</span><span class="tag"><b>語言</b>英文</span></div></div>
-<div class="pro-cta"><a class="btn btn-gold btn-xl" href="../contact.html">聯絡 ZDelp</a></div></div></div></section>
-<section class="bg-grey"><div class="wrap"><div class="passed"><div class="pl"><b>ZDelp 評估（預覽：虛線項目尚未通過，三項全過才上線）</b><div class="chks"><span class="chk off" title="預覽：尚未通過，公開版不上線">身分與資格核對</span><span class="chk off" title="預覽：尚未通過，公開版不上線">訪談</span><span class="chk off" title="預覽：尚未通過，公開版不上線">實際評估</span></div></div><div class="scores"><div class="score"><b>4.7</b><span><span class="stars" aria-hidden="true"><i>★</i><i>★</i><i>★</i><i>★</i><i class="h">★</i></span><em>ZDelp 評分</em></span></div></div></div><div class="layout"><div>
-<div class="head sub first"><div><p class="kick">服務範圍</p><h2>能辦什麼</h2></div></div><div class="scope"><div><h3>英國有限公司設立（一般營運公司）</h3><ul><li>向英國公司註冊處線上註冊</li><li>倫敦註冊辦公地址與郵件轉寄</li><li>董事服務地址</li><li>董事與重大控制人身分驗證</li></ul></div><div><h3>設立後的合規跟進</h3><ul><li>年度 confirmation statement</li><li>年度帳目與公司稅申報</li><li>VAT、PAYE 與 EORI 登記（是否登記取決於業務性質，不構成稅務建議）</li><li>已有公司的合規接手</li></ul></div></div><p class="notinc"><b>不包含</b>銀行開戶（由銀行各自審批）</p>
-<div class="assess"><p class="kick">服務介紹</p><p>1Office 提供英國有限公司的線上設立、倫敦註冊地址與後續年度申報，營運主體為 1Office Group Ltd。人在海外的創辦人可遠端辦理。</p><p>服務按套餐收費、不按小時計；設立後的註冊地址與年度申報由同一機構接續。</p><p>銀行開戶由銀行各自審批，不屬公司設立服務。費用以機構報價為準。</p><div class="who"><i>ZD</i><span>ZDelp ・ 2026 年 9 月更新</span></div></div>
-<div class="head sub"><div><p class="kick">人員</p><h2>在地專員</h2></div></div><div class="people"><div class="person"><div class="pp"><div class="ph-photo">照片<br>待提供</div></div><b>〔待填〕</b></div><div class="person"><div class="pp"><div class="ph-photo">照片<br>待提供</div></div><b>〔待填〕</b></div></div>
+<div class="pro-cta"><a class="btn btn-gold btn-xl" href="../contact.html">聯絡我們</a></div></div></div></section>
+<section class="bg-grey"><div class="wrap"><div class="passed"><div class="pl"><b>評估（預覽：虛線＝尚未通過；公開版只列已通過項目）</b><div class="chks"><span class="chk off" title="預覽：尚未通過，公開版不上線">資格核對</span><span class="chk off" title="預覽：尚未通過，公開版不上線">專業驗證</span><span class="chk off" title="預覽：尚未通過，公開版不上線">口碑推薦</span></div></div><div class="scores"><div class="score"><b>4.7</b><span><span class="stars" aria-hidden="true"><i>★</i><i>★</i><i>★</i><i>★</i><i class="h">★</i></span><em>ZDelp 評分</em></span></div></div></div><div class="layout"><div>
+<div class="head sub first"><div><h2>協助內容</h2></div></div><div class="scope"><div><h3>英國有限公司設立（一般營運公司）</h3><ul><li>向英國公司註冊處線上註冊</li><li>倫敦註冊辦公地址與郵件轉寄</li><li>董事服務地址</li><li>董事與重大控制人身分驗證</li></ul></div><div><h3>設立後的合規跟進</h3><ul><li>年度 confirmation statement</li><li>年度帳目與公司稅申報</li><li>VAT、PAYE 與 EORI 登記（是否登記取決於業務性質，不構成稅務建議）</li><li>已有公司的合規接手</li></ul></div></div><p class="notinc"><b>不包含</b>銀行開戶（由銀行各自審批）</p>
+<div class="assess"><p class="kick">服務介紹</p><p>1Office 提供英國有限公司的線上設立、倫敦註冊地址與後續年度申報，營運主體為 1Office Group Ltd。人在海外的創辦人可遠端辦理。</p><p>服務按套餐收費、不按小時計；設立後的註冊地址與年度申報由同一機構接續。</p><p>銀行開戶由銀行各自審批，不屬公司設立服務。費用以機構報價為準。</p></div>
+<div class="people-panel"><div class="head sub"><div><h2>在地專員</h2></div></div><div class="people"><div class="person"><div class="pp"><div class="ph-photo">照片<br>待提供</div></div><b>〔待填〕</b></div><div class="person"><div class="pp"><div class="ph-photo">照片<br>待提供</div></div><b>〔待填〕</b></div></div></div>
 
 </div>
 <aside class="side">
-<div class="box navy"><b class="t">需要這項服務？</b><p>告訴我們你的需要。</p><a class="btn btn-gold" href="../contact.html">聯絡 ZDelp</a></div>
-<div class="box"><b class="t">基本資料</b><table class="tbl"><tr><td>營運主體</td><td>1Office Group Ltd</td></tr><tr><td>所在地</td><td>倫敦 City of London</td></tr><tr><td>官網</td><td>1office.co</td></tr><tr><td>語言</td><td>英文</td></tr><tr><td>服務對象</td><td>非英國居民創辦人、中小企業</td></tr><tr><td>資料核對日</td><td>〔待填〕</td></tr></table></div>
+<div class="box navy"><b class="t">需要這項服務？</b><p>告訴我們你的需要。</p><a class="btn btn-gold" href="../contact.html">聯絡我們</a></div>
+<div class="box"><b class="t">基本資料</b><table class="tbl"><tr><td>營運主體</td><td>1Office Group Ltd</td></tr><tr><td>所在地</td><td>倫敦 City of London</td></tr><tr><td>語言</td><td>英文</td></tr><tr><td>服務對象</td><td>非英國居民創辦人、中小企業</td></tr></table></div>
+
 
 
 </aside></div></div></section>
 
-</main><footer><div class="wrap"><div class="foot"><div><b>ZDelp Limited</b><p>香港註冊<br>在地・可靠・同行</p></div><div><b>網站</b><p class="foot-links"><a href="../services.html">服務</a><a href="../verify.html">信任與保障</a><a href="../about.html">關於 ZDelp</a><a href="../contact.html">聯絡</a><br><a class="foot-partner" href="../partners.html">在地機構與專業人士：加入 ZDelp</a></p></div><div><b>聯絡</b><p><a href="https://wa.me/message/K7CHUBLJY4ONN1" target="_blank" rel="noopener">WhatsApp</a> · <a href="https://line.me/R/ti/p/@257ziphh" target="_blank" rel="noopener">LINE</a> · <a href="mailto:info@zagdim.com">info@zagdim.com</a></p></div></div><p class="legal">泰國簽證由 ZDelp 專員直接辦理。其他服務由 ZDelp 評估過的在地機構與專業人士辦理，ZDelp 負責評估、安排與跟進。</p><p class="legal">本站內容僅供一般參考，不構成稅務、法律或投資建議。辦理條件與費用以各服務詳情及實際報價為準；簽證審批由相關政府部門決定，開戶結果由銀行決定，ZDelp 不保證任何申請必然通過。</p></div></footer><script>(function(){if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;document.documentElement.classList.add('anim');var els=[].slice.call(document.querySelectorAll('section .wrap>*'));var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.06});els.forEach(function(el){io.observe(el)});setTimeout(function(){els.forEach(function(el){el.classList.add('in')})},4000)})();</script></body></html>
+</main><footer><div class="wrap"><div class="foot"><div><b>ZDelp Limited</b><p>在地・可靠・同行</p></div><div><b>網站</b><p class="foot-links"><a href="../services.html">服務</a><a href="../verify.html">信任與保障</a><a href="../about.html">關於我們</a><a href="../contact.html">聯絡</a><br><a class="foot-partner" href="../partners.html">在地機構與專業人士：加入我們</a></p></div><div><b>聯絡</b><p><a href="https://wa.me/message/LEFWMCKCXNF3O1" target="_blank" rel="noopener">WhatsApp</a> · <a href="https://lin.ee/yVDUzDo" target="_blank" rel="noopener">LINE</a> · 微信 ZDelp_Official</p></div></div><p class="legal">本站內容僅供一般參考，不構成稅務、法律或投資建議。辦理條件與費用以各服務詳情及正式報價為準；簽證審批由相關政府部門決定，開戶結果由銀行決定，我們不保證任何申請必然通過。</p></div></footer><script>(function(){if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;document.documentElement.classList.add('anim');var els=[].slice.call(document.querySelectorAll('section .wrap>*'));var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.06});els.forEach(function(el){io.observe(el)});setTimeout(function(){els.forEach(function(el){el.classList.add('in')})},4000)})();</script></body></html>

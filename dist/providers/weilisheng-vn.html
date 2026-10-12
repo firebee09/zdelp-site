@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>維律盛業顧問 名片頁｜ZDelp（內部預覽）</title><meta name="description" content="維律盛業顧問・越南公司設立與簽證・越南（尚未公開，內部預覽）"><meta name="robots" content="noindex"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap"><style>
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>維律盛業顧問｜ZDelp 在地機構與專業人士</title><meta name="description" content="維律盛業顧問・越南公司設立與簽證・越南"><meta name="robots" content="noindex"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap"><style>
 :root{--navy:#10374E;--navy-2:#0B2334;--navy-3:#163F5A;--teal:#179193;--dteal:#0F6E70;--lteal:#E4F3F3;--gold:#EEBF01;--lgrey:#F2F5F7;--grey:#cccccc;--line:#DEE5EA;--text:#152A38;--muted:#526779;--white:#fff;
  --fs:18px;--h1:clamp(44px,5.4vw,76px);--h1s:clamp(36px,4.2vw,56px);--h2:clamp(30px,3.2vw,44px);--h3:22px;--lead:clamp(19px,1.5vw,22px);--nav-h:88px}
 *{box-sizing:border-box}
@@ -209,6 +209,63 @@ html.anim section .wrap>.in{opacity:1;transform:none}
 /* footer partner entry (B2B, quiet) */
 .foot-partner{display:inline-block;margin-top:10px;font-size:13.5px;color:rgba(255,255,255,.6)!important;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25)}
 .foot-partner:hover{color:#fff!important}
+.foot>div{min-width:0}.foot-links a{display:inline-block}.foot-links a.foot-partner{white-space:normal}
+/* contact page 10-12b: form left, buttons right */
+.contact-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:48px;align-items:start}
+.cbtns{display:flex;flex-direction:column;gap:14px}
+.cbtn{display:flex;align-items:center;gap:16px;width:100%;min-height:76px;box-sizing:border-box;padding:14px 22px;border-radius:14px;color:#fff;text-decoration:none;line-height:1.3;transition:filter .15s}
+.cbtn svg{width:30px;height:30px;flex:none}
+.cbtn b{display:block;font-size:18px;font-weight:800;color:#fff}
+.cbtn small{display:block;font-size:14.5px;color:rgba(255,255,255,.88);overflow-wrap:anywhere}
+.cbtn:hover{filter:brightness(1.07)}
+.cbtn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.cbtn.wa{background:#25D366}.cbtn.line{background:#06C755}.cbtn.mail{background:var(--navy)}
+@media(max-width:800px){.contact-grid{grid-template-columns:1fr;gap:28px}}
+/* promise band: animated network (2026-10-12) */
+.net{background:var(--navy-2);color:#fff;padding:46px 0 50px;position:relative;overflow:hidden;border-top:1px solid rgba(255,255,255,.06)}
+.net-grid{display:grid;grid-template-columns:minmax(300px,410px) 1fr;gap:40px;align-items:center}
+.net-pill{border-left:3px solid rgba(255,255,255,.16);padding:10px 0 12px 20px;opacity:.5;transition:border-color .6s,opacity .6s}
+.net-pill+.net-pill{margin-top:14px}
+.net-pill.on{border-color:var(--gold);opacity:1}
+.net-pill b{display:flex;gap:12px;align-items:baseline;font-family:"Noto Sans TC",Inter,sans-serif;font-weight:900;font-size:21px;line-height:1.35;color:#fff}
+.net-pill b i{font-style:normal;font-family:Inter,sans-serif;font-size:12px;letter-spacing:.14em;color:var(--gold);font-weight:800;flex:none}
+.net-pill p{font-size:15px;color:rgba(255,255,255,.74);margin-top:6px;line-height:1.6;text-wrap:pretty}
+.net-steps{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.net-steps li{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;line-height:1;padding:5px 10px 5px 5px;white-space:nowrap;border-radius:999px;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.72);transition:border-color .4s,color .4s}
+.net-steps li::before{content:"✓";width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.12);color:transparent;display:grid;place-items:center;font-size:11px;font-weight:900;transition:background .4s,color .4s}
+.net-steps li.on{border-color:rgba(238,191,1,.6);color:#fff}
+.net-steps li.on::before{background:var(--gold);color:var(--navy)}
+.net-stage{min-width:0}
+.net-stage svg{display:block;width:100%;height:auto;overflow:visible}
+.net-stage text{font-family:Inter,"Noto Sans TC",sans-serif;font-weight:600;fill:rgba(255,255,255,.88);transition:fill .4s}
+.net-stage text.on{fill:var(--gold);font-weight:800}
+.net-stage text.zn-brand{fill:var(--gold);font-weight:800;letter-spacing:.16em}
+.trust span i{transition:box-shadow .6s,transform .6s}
+.trust span.on i{box-shadow:0 0 0 5px rgba(238,191,1,.22);transform:scale(1.08)}
+html[lang=en] .net-pill b{font-family:Inter,sans-serif;font-weight:800;letter-spacing:-.01em}
+@media(max-width:900px){.net-grid{grid-template-columns:1fr;gap:8px}.net-stage{order:-1;max-width:460px;width:100%;margin:0 auto}.net{padding:22px 0 36px}.net-pill p{font-size:14.5px}}
+@media(max-width:520px){.net-pill b{font-size:19px}}
+
+/* 2026-10-12：動畫移到「怎麼運作」，置中獨立段落，不與頭圖爭主次 */
+.net-how{padding:84px 0 88px;background:radial-gradient(ellipse 70% 60% at 50% 42%,#173f59 0%,var(--navy-2) 70%)}
+.net-head{text-align:center;max-width:760px;margin:0 auto 30px}
+.net-head .kick{color:var(--gold);justify-content:center;display:flex}
+.net-head h2{color:#fff;margin:6px 0 14px}
+.net-head p{color:rgba(255,255,255,.74);font-size:calc(var(--fs) + 1px);line-height:1.7}
+.net-tabs{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:860px;margin:0 auto 10px}
+.net-tabs .net-pill+.net-pill{margin-top:0}
+.net-how .net-stage{max-width:900px;margin:0 auto}
+.net-flow{margin-top:26px}
+.net-flow .fl{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14);transition:border-color .5s,background .5s,transform .5s}
+.net-flow .fl b{color:#fff}
+.net-flow .fl p{color:rgba(255,255,255,.7)}
+.net-flow .fl i{background:rgba(255,255,255,.14);color:#fff;transition:background .5s,color .5s}
+.net-flow .fl.on{border-color:rgba(238,191,1,.7);background:rgba(238,191,1,.07);transform:translateY(-3px)}
+.net-flow .fl.on i{background:var(--gold);color:var(--navy)}
+.net-how .split-note{justify-content:center;color:rgba(255,255,255,.72)}
+.net-how .split-note a{color:#fff}
+@media(max-width:900px){.net-how{padding:52px 0 56px}.net-tabs{grid-template-columns:1fr;gap:12px}.net-how .net-stage{order:0;max-width:520px}.net-flow{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.net-flow{grid-template-columns:1fr}}
 .mockbar{background:var(--gold);color:var(--navy);font-size:13.5px;font-weight:700;text-align:center;padding:8px 16px}
 .crumb{font-size:14px;color:rgba(255,255,255,.7);margin-bottom:22px;display:flex;gap:8px;flex-wrap:wrap}
 .crumb a{color:rgba(255,255,255,.85);text-decoration:none}.crumb span{opacity:.5}
@@ -277,7 +334,7 @@ html.anim section .wrap>.in{opacity:1;transform:none}
 .src{font-size:13.5px;color:var(--muted);margin-top:26px;line-height:1.7}
 .src b{color:var(--dteal)}
 /* v0.2 */
-.pro-tagline{text-wrap:balance;font-size:clamp(19px,1.6vw,23px);color:#fff;margin-top:10px;font-weight:500;line-height:1.5;max-width:34ch}
+.pro-tagline{text-wrap:balance;font-size:clamp(19px,1.6vw,23px);color:#fff;margin-top:10px;font-weight:500;line-height:1.5;max-width:30em}
 .pro-sub{font-size:15px!important;color:rgba(255,255,255,.62)!important}
 .pro-cta{min-width:0!important}
 .head.sub{margin-top:48px;margin-bottom:0}.head.sub.first{margin-top:0}
@@ -335,7 +392,7 @@ html.anim section .wrap>.in{opacity:1;transform:none}
 .notinc b{color:var(--navy);margin-right:8px;font-family:"Noto Sans TC",sans-serif}
 
 /* v1.0 stars horizontal */
-.score .stars{display:inline-flex!important;flex-direction:row!important;gap:2px;font-size:22px}
+.score .stars{display:inline-flex!important;flex-direction:row!important;gap:2px;font-size:22px;color:var(--gold)}
 
 /* v1.1 */
 .score em{font-size:13.5px;color:var(--muted)}
@@ -366,23 +423,30 @@ html.anim section .wrap>.in{opacity:1;transform:none}
 @media(max-width:900px){.pv-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.pv-grid{grid-template-columns:1fr}}
 
-</style></head><body><header class="nav"><div class="wrap"><a class="logo" href="../index.html"><img src="../assets/zdelp.png" alt="ZDelp" class="nav-logo"><span>ZDelp<small>LOCAL ASSISTANCE</small></span></a><nav class="links" id="zd-links"><a href="../index.html">首頁</a><a href="../services.html">服務</a><a href="../verify.html">信任與保障</a><a href="../about.html">關於 ZDelp</a><a href="../contact.html">聯絡</a></nav><button class="burger" type="button" aria-label="選單" aria-expanded="false" aria-controls="zd-links" onclick="var l=this.parentNode.querySelector('.links');var o=l.classList.toggle('open');this.setAttribute('aria-expanded',o)"><span></span></button><a class="lang" href="../en/index.html" hreflang="en">EN</a><a class="btn btn-gold nav-cta" href="../contact.html">聯絡 ZDelp</a></div></header><main><div class="mockbar">MOCK・減法版預覽（維律盛業顧問）・〔待填〕＝待 Fiamma 提供或確認</div>
+/* v1.9（10-11）：人員區加底色面板；兩個分數並排 */
+.people-panel{margin-top:34px;padding:26px 28px 30px;border-radius:22px;background:linear-gradient(135deg,rgba(14,52,77,.06),rgba(240,190,0,.12));border:1.5px solid var(--line)}
+.people-panel .head.sub{margin-top:0}
+.people-panel .person{background:transparent;border:0;padding:0;align-items:center;text-align:center}
+.scores{display:flex;gap:28px;flex-wrap:wrap;align-items:center}
+
+</style></head><body><header class="nav"><div class="wrap"><a class="logo" href="../index.html"><img src="../assets/zdelp.png" alt="ZDelp" class="nav-logo"><span>ZDelp<small>LOCAL ASSISTANCE</small></span></a><nav class="links" id="zd-links"><a href="../index.html">首頁</a><a href="../services.html">服務</a><a href="../verify.html">信任與保障</a><a href="../about.html">關於我們</a><a href="../contact.html">聯絡</a></nav><button class="burger" type="button" aria-label="選單" aria-expanded="false" aria-controls="zd-links" onclick="var l=this.parentNode.querySelector('.links');var o=l.classList.toggle('open');this.setAttribute('aria-expanded',o)"><span></span></button><a class="lang" href="../en/index.html" hreflang="en">EN</a><a class="btn btn-gold nav-cta" href="../contact.html">聯絡我們</a></div></header><main>
 <section class="hero sm"><div class="wrap">
 <div class="crumb"><a href="../services.html">服務</a><span>›</span><a href="../providers.html">越南</a><span>›</span><a href="../providers.html">越南公司設立與簽證</a></div>
 <div class="pro-hero"><div class="pro-logo"><img src="../assets/providers/weilisheng-vn.png" alt="維律盛業顧問 標誌"></div>
-<div><span class="badge ver"><i>✓</i>在地機構／專業人士辦理</span><h1 style="margin-top:14px">維律盛業顧問</h1><p class="pro-tagline">越南公司設立、簽證與後續營運支援，可用中文溝通。</p><p class="pro-sub">Vigorous Consulting Group ・ 胡志明市／河內／平陽</p><div class="tags"><span class="tag"><b>地區</b>越南・胡志明市</span><span class="tag"><b>類別</b>越南公司設立與簽證</span><span class="tag"><b>語言</b>中文・英文・越南文</span></div></div>
-<div class="pro-cta"><a class="btn btn-gold btn-xl" href="../contact.html">聯絡 ZDelp</a></div></div></div></section>
-<section class="bg-grey"><div class="wrap"><div class="passed"><div class="pl"><b>ZDelp 評估（預覽：虛線項目尚未通過，三項全過才上線）</b><div class="chks"><span class="chk off" title="預覽：尚未通過，公開版不上線">身分與資格核對</span><span class="chk off" title="預覽：尚未通過，公開版不上線">訪談</span><span class="chk off" title="預覽：尚未通過，公開版不上線">實際評估</span></div></div><div class="scores"><div class="score"><b>4.7</b><span><span class="stars" aria-hidden="true"><i>★</i><i>★</i><i>★</i><i>★</i><i class="h">★</i></span><em>ZDelp 評分</em></span></div></div></div><div class="layout"><div>
-<div class="head sub first"><div><p class="kick">服務範圍</p><h2>能辦什麼</h2></div></div><div class="scope"><div><h3>公司設立：越南外資公司</h3><ul><li>投資登記證（IRC）與企業登記證（ERC）申請</li><li>印章、稅務登記、直接投資資本帳戶開戶協助</li><li>母國文件公證與領事認證的時程安排</li><li>以個人或母公司名義設立皆可辦理</li></ul></div><div><h3>簽證與居留：投資簽證、暫住證（TRC）</h3><ul><li>投資簽證（DT1 至 DT4）申請</li><li>外國人暫住證（TRC）申請</li><li>須本人親赴越南的事項集中安排行程</li><li>其餘步驟可遠端進行</li></ul></div><div><h3>設立後：稅務與合規（可續接）</h3><ul><li>稅務申報與顧問</li><li>營運合規</li><li>專業經理人代管（委託管理）</li></ul></div></div><p class="notinc"><b>不包含</b>第二國籍、海外教育與實習（機構另有此類服務，不在本頁範圍）</p>
-<div class="assess"><p class="kick">ZDelp 的評估</p><p>維律盛業顧問提供越南公司設立、簽證與後續營運支援，可用中文溝通。主要服務計劃在越南設立公司並持續經營的投資人與企業。</p><p>從現有專訪紀錄，ZDelp 看重的是親辦行程的事前安排：先說明哪些事項需要本人到越南，再盡量集中處理，方便客人規劃行程。</p><p>公司設立與居留申請各有條件。開始前，需確認業務內容、投資安排，以及需要本人到場的事項。</p><div class="who"><i>ZD</i><span>ZDelp ・ 2026 年 9 月更新</span></div></div>
-<div class="head sub"><div><p class="kick">人員</p><h2>在地專員</h2></div></div><div class="people"><div class="person"><div class="pp"><div class="ph-photo">照片<br>待提供</div></div><b>〔待填〕</b></div><div class="person"><div class="pp"><div class="ph-photo">照片<br>待提供</div></div><b>〔待填〕</b></div></div>
+<div><span class="badge ver"><i>✓</i>在地機構／專業人士辦理</span><h1 style="margin-top:14px">維律盛業顧問</h1><p class="pro-tagline">越南公司設立、簽證與後續營運支援，可用中文溝通。</p><p class="pro-sub">Vigorous Consulting Group ・ 胡志明市／河內／平陽</p><div class="tags"><span class="tag"><b>地區</b>越南・胡志明市</span><span class="tag"><b>類別</b>越南公司設立與簽證</span><span class="tag"><b>語言</b>中文・越南文</span></div></div>
+<div class="pro-cta"><a class="btn btn-gold btn-xl" href="../contact.html">聯絡我們</a></div></div></div></section>
+<section class="bg-grey"><div class="wrap"><div class="passed"><div class="pl"><b>已通過評估</b><div class="chks"><span class="chk"><i>✓</i>資格核對</span><span class="chk"><i>✓</i>口碑推薦</span></div></div><div class="scores"><div class="score"><b>4.7</b><span><span class="stars" aria-hidden="true"><i>★</i><i>★</i><i>★</i><i>★</i><i class="h">★</i></span><em>ZDelp 評分</em></span></div><div class="score"><b>5.0</b><span><em>口碑推薦</em></span></div></div></div><div class="layout"><div>
+<div class="head sub first"><div><h2>協助內容</h2></div></div><div class="scope"><div><h3>越南外資公司設立</h3><ul><li>投資登記證（IRC）與企業登記證（ERC）申請</li><li>印章、稅務登記、直接投資資本帳戶開戶協助</li><li>母國文件公證與領事認證的時程安排</li><li>以個人或母公司名義設立皆可辦理</li></ul></div><div><h3>投資簽證與暫住證</h3><ul><li>投資簽證（DT1 至 DT4）申請</li><li>外國人暫住證（TRC）申請</li><li>須本人親赴越南的事項集中安排行程</li><li>其餘步驟可遠端進行</li></ul></div><div><h3>稅務申報與營運合規</h3><ul><li>稅務申報與顧問</li><li>營運合規</li><li>專業經理人代管（委託管理）</li></ul></div></div>
+<div class="assess"><p class="kick">我們的評估</p><p>維律盛業顧問提供越南外資公司設立、投資簽證與暫住證申請，以及設立後的稅務與營運合規支援，服務語言為中文與越南文，主要服務計劃在越南設立公司並長期經營的投資人與企業。</p><p>依規定須本人親赴越南的事項，機構會在委託初期說明，並集中安排於同一趟行程；其餘程序以遠端方式進行，便於投資人規劃往返時間。</p><p>公司設立與居留申請各有資格條件；委託前須先確認業務範圍、投資架構，以及須本人到場的事項。</p></div>
+
 
 </div>
 <aside class="side">
-<div class="box navy"><b class="t">需要這項服務？</b><p>告訴我們你的需要。</p><a class="btn btn-gold" href="../contact.html">聯絡 ZDelp</a></div>
-<div class="box"><b class="t">基本資料</b><table class="tbl"><tr><td>營運主體</td><td>Vigorous Consulting Group（越南維律盛業商務顧問公司）</td></tr><tr><td>所在地</td><td>胡志明市、河內、平陽（另有台中、曼谷據點）</td></tr><tr><td>官網</td><td>vigorouscg.com</td></tr><tr><td>語言</td><td>中文・英文・越南文</td></tr><tr><td>服務對象</td><td>計劃在越南設立公司並持續經營的投資人與企業</td></tr><tr><td>資料核對日</td><td>〔待填〕</td></tr></table></div>
+<div class="box navy"><b class="t">需要這項服務？</b><p>告訴我們你的需要。</p><a class="btn btn-gold" href="../contact.html">聯絡我們</a></div>
+<div class="box"><b class="t">基本資料</b><table class="tbl"><tr><td>營運主體</td><td>Vigorous Consulting Group（越南維律盛業商務顧問公司）</td></tr><tr><td>所在地</td><td>胡志明市、河內、平陽（另有台中、曼谷據點）</td></tr><tr><td>語言</td><td>中文・越南文</td></tr><tr><td>服務對象</td><td>計劃在越南設立公司並持續經營的投資人與企業</td></tr></table></div>
+<div class="box"><b class="t">服務地區</b><table class="tbl"><tr><td>越南</td><td>胡志明市、河內、平陽</td></tr></table></div>
 
 
 </aside></div></div></section>
 
-</main><footer><div class="wrap"><div class="foot"><div><b>ZDelp Limited</b><p>香港註冊<br>在地・可靠・同行</p></div><div><b>網站</b><p class="foot-links"><a href="../services.html">服務</a><a href="../verify.html">信任與保障</a><a href="../about.html">關於 ZDelp</a><a href="../contact.html">聯絡</a><br><a class="foot-partner" href="../partners.html">在地機構與專業人士：加入 ZDelp</a></p></div><div><b>聯絡</b><p><a href="https://wa.me/message/K7CHUBLJY4ONN1" target="_blank" rel="noopener">WhatsApp</a> · <a href="https://line.me/R/ti/p/@257ziphh" target="_blank" rel="noopener">LINE</a> · <a href="mailto:info@zagdim.com">info@zagdim.com</a></p></div></div><p class="legal">泰國簽證由 ZDelp 專員直接辦理。其他服務由 ZDelp 評估過的在地機構與專業人士辦理，ZDelp 負責評估、安排與跟進。</p><p class="legal">本站內容僅供一般參考，不構成稅務、法律或投資建議。辦理條件與費用以各服務詳情及實際報價為準；簽證審批由相關政府部門決定，開戶結果由銀行決定，ZDelp 不保證任何申請必然通過。</p></div></footer><script>(function(){if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;document.documentElement.classList.add('anim');var els=[].slice.call(document.querySelectorAll('section .wrap>*'));var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.06});els.forEach(function(el){io.observe(el)});setTimeout(function(){els.forEach(function(el){el.classList.add('in')})},4000)})();</script></body></html>
+</main><footer><div class="wrap"><div class="foot"><div><b>ZDelp Limited</b><p>在地・可靠・同行</p></div><div><b>網站</b><p class="foot-links"><a href="../services.html">服務</a><a href="../verify.html">信任與保障</a><a href="../about.html">關於我們</a><a href="../contact.html">聯絡</a><br><a class="foot-partner" href="../partners.html">在地機構與專業人士：加入我們</a></p></div><div><b>聯絡</b><p><a href="https://wa.me/message/LEFWMCKCXNF3O1" target="_blank" rel="noopener">WhatsApp</a> · <a href="https://lin.ee/yVDUzDo" target="_blank" rel="noopener">LINE</a> · 微信 ZDelp_Official</p></div></div><p class="legal">本站內容僅供一般參考，不構成稅務、法律或投資建議。辦理條件與費用以各服務詳情及正式報價為準；簽證審批由相關政府部門決定，開戶結果由銀行決定，我們不保證任何申請必然通過。</p></div></footer><script>(function(){if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;document.documentElement.classList.add('anim');var els=[].slice.call(document.querySelectorAll('section .wrap>*'));var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.06});els.forEach(function(el){io.observe(el)});setTimeout(function(){els.forEach(function(el){el.classList.add('in')})},4000)})();</script></body></html>
