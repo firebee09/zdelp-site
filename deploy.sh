@@ -8,5 +8,13 @@ git add -A && git commit -qm "${1:-update}" || true
 git push -q origin main
 rm -rf /tmp/ghp && mkdir /tmp/ghp && cp -R dist/. /tmp/ghp/
 [ -f LIVE ] || rm -f /tmp/ghp/CNAME   # 建立 LIVE 檔後才帶 CNAME（正式上線）
+# 正式站只放已核可的名片頁（provider-publish-override.json）；其餘內部預覽頁不上線（2026-10-12）
+if [ -f LIVE ]; then python3 - <<'EOF'
+import json,os,glob
+ok=set(json.load(open('provider-publish-override.json')))
+for f in glob.glob('/tmp/ghp/providers/*.html')+glob.glob('/tmp/ghp/en/providers/*.html'):
+    if os.path.basename(f)[:-5] not in ok: os.remove(f); print('not live:',f)
+EOF
+fi
 cd /tmp/ghp && git init -q && git checkout -q -b gh-pages && git add -A && git -c user.name="Fiamma (Zagdim)" -c user.email="zagdimoverseas@gmail.com" commit -qm "deploy: ${1:-update}" && git remote add origin https://github.com/firebee09/zdelp-site.git && git push -qf origin gh-pages
 echo "deployed → https://firebee09.github.io/zdelp-site/"
