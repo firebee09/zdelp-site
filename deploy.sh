@@ -14,6 +14,8 @@ import json,os,glob
 ok=set(json.load(open('provider-publish-override.json')))
 for f in glob.glob('/tmp/ghp/providers/*.html')+glob.glob('/tmp/ghp/en/providers/*.html'):
     if os.path.basename(f)[:-5] not in ok: os.remove(f); print('not live:',f)
+for f in ['/tmp/ghp/providers.html','/tmp/ghp/en/providers.html']:  # 每類≥3家才公開名單
+    if os.path.exists(f): os.remove(f); print('not live:',f)
 EOF
 fi
 cd /tmp/ghp && git init -q && git checkout -q -b gh-pages && git add -A && git -c user.name="Fiamma (Zagdim)" -c user.email="zagdimoverseas@gmail.com" commit -qm "deploy: ${1:-update}" && git remote add origin https://github.com/firebee09/zdelp-site.git && git push -qf origin gh-pages
