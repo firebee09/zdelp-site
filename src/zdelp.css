@@ -265,3 +265,25 @@ html[lang=en] .net-pill b{font-family:Inter,sans-serif;font-weight:800;letter-sp
 .net-how .split-note a{color:#fff}
 @media(max-width:900px){.net-how{padding:52px 0 56px}.net-tabs{grid-template-columns:1fr;gap:12px}.net-how .net-stage{order:0;max-width:520px}.net-flow{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.net-flow{grid-template-columns:1fr}}
+/* 2026-10-12：在地機構與專業人士名單頁＋服務分類下方連結 */
+.pv-group+.pv-group{margin-top:44px}
+.pv-group h2{font-size:24px;margin-bottom:18px;display:flex;align-items:center;gap:12px}
+.pv-group h2::before{content:"";width:28px;height:3px;background:var(--gold);border-radius:2px}
+.pv-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.pv-card{display:flex;gap:16px;align-items:center;background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:18px;text-decoration:none;color:inherit;transition:border-color .2s,transform .2s,box-shadow .2s}
+.pv-card:hover{border-color:var(--teal);transform:translateY(-2px);box-shadow:0 12px 26px -18px rgba(16,55,78,.5)}
+.pv-logo{flex:none;width:104px;height:72px;border-radius:12px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;overflow:hidden}
+.pv-logo img{max-width:92px;max-height:58px;object-fit:contain}
+.pv-b{min-width:0}
+.pv-b b{display:block;font-size:18px;color:var(--navy);line-height:1.35}
+.pv-b span{display:block;font-size:14px;color:var(--muted);margin-top:4px;line-height:1.5}
+.pv-score{display:flex;align-items:center;gap:6px;margin-top:6px;font-size:13px;color:var(--navy)}
+.pv-score b{font-size:14px;display:inline}
+.pv-more{margin-top:36px}
+.pv-strip{margin-top:22px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;font-size:15px}
+.pv-strip b{color:var(--navy);margin-right:4px}
+.pv-strip a{display:inline-flex;align-items:center;padding:6px 12px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--navy);font-weight:700;text-decoration:none;font-size:14px}
+.pv-strip a:hover{border-color:var(--teal)}
+.pv-strip a.pv-all{border:0;background:none;color:var(--dteal);padding:6px 4px}
+@media(max-width:900px){.pv-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.pv-grid{grid-template-columns:1fr}.pv-card{padding:14px}}

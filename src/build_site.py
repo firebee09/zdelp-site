@@ -38,7 +38,13 @@ U = {'dtv': ZAG + '/%e6%b3%b0%e5%9c%8b-dtv-%e7%b0%bd%e8%ad%89%e4%bb%a3%e8%be%a6%
      'bank': ZAG + '/services/thailand-bank-account-opening-assistance/',
      'bkk': ZAG + '/services/bangkok-rental-management-overseas-owner/',
      'uk': ZAG + '/services/uk/'}
-IMG = {'dtv': 'banner-dtv.jpg', 'retire': 'banner-retire.jpg', 'ltr': 'banner-ltr.jpg', 'elite': 'banner-elite.jpg', 'nonb': 'banner-nonb.jpg', 'bank': 'banner-bank.jpg', 'bkk': 'banner-bkk.jpg', 'uk': 'banner-uk.jpg'}
+U.update({'th_co': ZAG + '/services/thailand-company-setup-foreign-shareholding-compliance/',
+          'jpvo': ZAG + '/%e6%97%a5%e6%9c%ac%e8%99%9b%e6%93%ac%e8%be%a6%e5%85%ac%e5%ae%a4-1sbc/',
+          'jppr': ZAG + '/services/japan-permanent-residence-application/',
+          'mm2h': ZAG + '/2024-%e9%a6%ac%e4%be%86%e8%a5%bf%e4%ba%9e-mm2h-%e7%ac%ac%e4%ba%8c%e5%ae%b6%e5%9c%92-%e7%b0%bd%e8%ad%89%e4%bb%a3%e8%be%a6%e6%9c%8d%e5%8b%99/',
+          'srrv': ZAG + '/philippines-srrv-application-service/'})
+IMG = {'th_co': 'banner-th.jpg', 'jpvo': 'banner-jpvo.jpg', 'jppr': 'banner-jppr.jpg', 'mm2h': 'banner-mm2h.jpg', 'srrv': 'banner-srrv.jpg',
+       'dtv': 'banner-dtv.jpg', 'retire': 'banner-retire.jpg', 'ltr': 'banner-ltr.jpg', 'elite': 'banner-elite.jpg', 'nonb': 'banner-nonb.jpg', 'bank': 'banner-bank.jpg', 'bkk': 'banner-bkk.jpg', 'uk': 'banner-uk.jpg'}
 
 T = {
  'zh': dict(lang='zh-Hant', nav=['首頁', '服務', '信任與保障', '關於我們', '聯絡'], partner_link='在地機構與專業人士：加入我們', cta='聯絡我們', sw='EN', tag='LOCAL ASSISTANCE', brand='在地・可靠・同行',
@@ -64,6 +70,9 @@ def link(page, lang, preview, rel, anchor=''):
 def nav(active, lang, preview, rel, page_prefix=''):
     t = T[lang]
     items = ''.join('<a%s href="%s">%s</a>' % (' class="on"' if p == active else '', page_prefix + link(p, lang, preview, rel), n) for p, n in zip(NAV_PAGES, t['nav']))
+    if not preview:  # 在地機構與專業人士名單（只有中文版；英文頁連到同一頁）
+        pv_href = page_prefix + ('providers.html' if lang == 'zh' else '../providers.html')
+        items += '<a%s href="%s">%s</a>' % (' class="on"' if active == 'providers' else '', pv_href, '在地專家' if lang == 'zh' else 'Local experts')
     other = 'en' if lang == 'zh' else 'zh'
     sw_page = active if active in PAGES else 'index'
     sw = ('#%s-%s' % (other, active)) if preview else (page_prefix + ('en/' if other == 'en' else '../') + sw_page + '.html')
@@ -76,7 +85,7 @@ def nav(active, lang, preview, rel, page_prefix=''):
 
 def footer(lang, preview, rel, page_prefix=''):
     t = T[lang]
-    links = ''.join('<a href="%s">%s</a>' % (page_prefix + link(p, lang, preview, rel), n) for p, n in zip(NAV_PAGES[1:], t['nav'][1:])) + '<br><a class="foot-partner" href="%s">%s</a>' % (page_prefix + link('partners', lang, preview, rel), t['partner_link'])
+    links = ''.join('<a href="%s">%s</a>' % (page_prefix + link(p, lang, preview, rel), n) for p, n in zip(NAV_PAGES[1:], t['nav'][1:])) + ('' if preview else '<a href="%s">%s</a>' % (page_prefix + ('providers.html' if lang == 'zh' else '../providers.html'), '在地專家' if lang == 'zh' else 'Local experts')) + '<br><a class="foot-partner" href="%s">%s</a>' % (page_prefix + link('partners', lang, preview, rel), t['partner_link'])
     return ('<footer><div class="wrap"><div class="foot"><div><b>ZDelp Limited</b><p>%s</p></div><div><b>%s</b><p class="foot-links">%s</p></div>'
             '<div><b>%s</b><p><a href="%s" target="_blank" rel="noopener">WhatsApp</a> · <a href="%s" target="_blank" rel="noopener">LINE</a> · %s</p></div></div>'
             '<p class="legal">%s</p></div></footer>') % (
@@ -92,6 +101,16 @@ def card(lang, key, title, desc, own, preview, rel, url=None, btn=None, external
     ext = ('<small class="ext">%s</small>' % t['ext']) if external else ''
     return ('<article class="card"><a class="card-img" href="%s"%s>%s</a><div class="b">%s<h3>%s</h3><p>%s</p><a class="more" href="%s"%s>%s</a>%s</div></article>') % (
             url, tgt, img(IMG[key], title, '', preview, False, rel), badge(lang, own), title, desc, url, tgt, btn or t['more'], ext)
+
+PV_NAME = {d['slug']: d['name'] for d in PROVIDERS}
+def pv_strip(lang, slugs, preview):
+    """服務分類下方：負責這類服務的在地機構與專業人士（連到名片頁；名片頁目前只有中文）。"""
+    if preview: return ''
+    pre = '' if lang == 'zh' else '../'
+    lab = '在地機構與專業人士' if lang == 'zh' else 'Local firms and professionals'
+    links = ''.join('<a href="%sproviders/%s.html">%s</a>' % (pre, sl, html.escape(PV_NAME[sl])) for sl in slugs if sl in PV_NAME)
+    allp = '<a class="pv-all" href="%sproviders.html">%s</a>' % (pre, '查看全部 →' if lang == 'zh' else 'See all (in Chinese) →')
+    return '<div class="pv-strip"><b>%s</b>%s%s</div>' % (lab, links, allp)
 
 def hs_block(lang, preview, target):
     if preview:
@@ -176,8 +195,10 @@ def p_services(lang, preview, rel):
 <section class="hero sm"><div class="wrap"><h1>你需要哪方面協助？</h1><p class="lead">找到需要的服務，查看辦理內容與費用。還不確定選哪一項，也可以直接聯絡我們。</p><div class="actions"><a class="btn btn-gold" href="{c}">聯絡我們</a></div></div></section>
 <section id="th" class="bg-grey"><div class="wrap"><div class="head"><div><h2>泰國簽證</h2></div></div><div class="cards">{th}</div><div class="strip-note"><p>泰國簽證提供 20 分鐘免費初審。先確認是否符合申請條件，再決定如何辦理。</p><a class="btn btn-line" href="{c}">聯絡我們</a></div></div></section>
 <section id="bank"><div class="wrap"><div class="head"><div><h2>銀行開戶</h2></div></div><div class="cards">{card(lang,'bank','泰國銀行開戶協助','協助安排銀行與分行，核對開戶文件。',False,preview,rel)}</div></div></section>
-<section id="property" class="bg-grey"><div class="wrap"><div class="head"><div><h2>房產出租與代管</h2></div></div><div class="cards">{card(lang,'bkk','曼谷房產出租與代管','協助處理房產出租與日常管理。',False,preview,rel)}</div></div></section>
-<section id="uk"><div class="wrap"><div class="head"><div><h2>英國置業與公司</h2></div></div><div class="cards">{card(lang,'uk','英國置業與公司服務','查看英國置業及公司相關服務。',False,preview,rel)}</div></div></section>
+<section id="property" class="bg-grey"><div class="wrap"><div class="head"><div><h2>房產出租與代管</h2></div></div><div class="cards">{card(lang,'bkk','曼谷房產出租與代管','協助處理房產出租與日常管理。',False,preview,rel)}</div>{pv_strip(lang,['88property-th'],preview)}</div></section>
+<section id="uk"><div class="wrap"><div class="head"><div><h2>英國置業與公司</h2></div></div><div class="cards">{card(lang,'uk','英國置業與公司服務','查看英國置業及公司相關服務。',False,preview,rel)}</div>{pv_strip(lang,['getground-uk','1office-uk','apex-uk'],preview)}</div></section>
+<section id="company" class="bg-grey"><div class="wrap"><div class="head"><div><h2>公司設立與商務</h2></div></div><div class="cards">{card(lang,'th_co','泰國公司設立與持股結構檢查','設立前先檢查外資持股與出資安排，再完成登記與後續申報。',True,preview,rel,btn='查看詳情')}{card(lang,'jpvo','日本虛擬辦公室','在日本取得商業登記地址與郵件代收，月費制。',False,preview,rel,btn='查看詳情')}</div>{pv_strip(lang,['1sbc','rba-vietnam','weilisheng-vn'],preview)}</div></section>
+<section id="residence"><div class="wrap"><div class="head"><div><h2>長期居留與移居</h2></div></div><div class="cards">{card(lang,'jppr','日本永住申請','先評估資格與申請時機，再由行政書士提交並跟進至許可。',False,preview,rel,btn='查看詳情')}{card(lang,'mm2h','馬來西亞 MM2H 第二家園','Platinum、Gold、Silver、SEZ 四類評估，從申請跟進到取得准證。',True,preview,rel,btn='查看詳情')}{card(lang,'srrv','菲律賓 SRRV 退休簽證','40 歲起可申請；評估方案與存款安排，跟進至獲批。',True,preview,rel,btn='查看詳情')}</div></div></section>
 {cta_band(lang, preview, rel, '還有其他需要？', sub='告訴我們想在哪裡辦什麼，我們會回覆是否能提供協助。')}
 <section class="tiny"><div class="wrap"><p class="note">辦理條件與費用以各服務詳情及正式報價為準。簽證審批由相關政府部門決定；開戶結果由銀行決定。</p></div></section>'''
     th = ''.join([card(lang, 'dtv', 'DTV visa', 'Check DTV eligibility, required documents and fees.', True, preview, rel), card(lang, 'retire', 'Retirement visas: Non-O and O-A', 'Explore Non-O and O-A application routes and assistance.', True, preview, rel), card(lang, 'ltr', 'LTR long-term resident visa', 'Check LTR eligibility, required documents and application assistance.', True, preview, rel), card(lang, 'elite', 'Thailand Privilege', 'Explore membership options and application assistance.', True, preview, rel), card(lang, 'nonb', 'Non-B business visa', 'Learn about business visa applications and related assistance.', True, preview, rel)])
@@ -185,8 +206,10 @@ def p_services(lang, preview, rel):
 <section class="hero sm"><div class="wrap"><h1>What can we help you with?</h1><p class="lead">Find the service you need and check what it covers and what it costs. If you are unsure where to start, contact us.</p><div class="actions"><a class="btn btn-gold" href="{c}">Contact us</a></div></div></section>
 <section id="th" class="bg-grey"><div class="wrap"><div class="head"><div><h2>Thai visas</h2></div></div><div class="cards">{th}</div><div class="strip-note"><p>A free 20-minute initial assessment is available for Thai visa applications. Check whether you meet the requirements before deciding how to proceed.</p><a class="btn btn-line" href="{c}">Contact us</a></div></div></section>
 <section id="bank"><div class="wrap"><div class="head"><div><h2>Bank accounts</h2></div></div><div class="cards">{card(lang,'bank','Thailand bank account opening assistance','Help with bank and branch arrangements and checks of application documents.',False,preview,rel)}</div></div></section>
-<section id="property" class="bg-grey"><div class="wrap"><div class="head"><div><h2>Property rental and management</h2></div></div><div class="cards">{card(lang,'bkk','Bangkok property rental and management','Help with letting your property and its day-to-day management.',False,preview,rel)}</div></div></section>
-<section id="uk"><div class="wrap"><div class="head"><div><h2>UK property and company services</h2></div></div><div class="cards">{card(lang,'uk','UK property and company services','Explore services for buying property and company matters in the UK.',False,preview,rel)}</div></div></section>
+<section id="property" class="bg-grey"><div class="wrap"><div class="head"><div><h2>Property rental and management</h2></div></div><div class="cards">{card(lang,'bkk','Bangkok property rental and management','Help with letting your property and its day-to-day management.',False,preview,rel)}</div>{pv_strip(lang,['88property-th'],preview)}</div></section>
+<section id="uk"><div class="wrap"><div class="head"><div><h2>UK property and company services</h2></div></div><div class="cards">{card(lang,'uk','UK property and company services','Explore services for buying property and company matters in the UK.',False,preview,rel)}</div>{pv_strip(lang,['getground-uk','1office-uk','apex-uk'],preview)}</div></section>
+<section id="company" class="bg-grey"><div class="wrap"><div class="head"><div><h2>Company setup and business services</h2></div></div><div class="cards">{card(lang,'th_co','Thailand company setup and shareholding review','Check foreign shareholding and capital records first, then register and keep up with annual filings.',True,preview,rel,btn='View details')}{card(lang,'jpvo','Japan virtual office','A registered business address and mail handling in Japan, billed monthly.',False,preview,rel,btn='View details')}</div>{pv_strip(lang,['1sbc','rba-vietnam','weilisheng-vn'],preview)}</div></section>
+<section id="residence"><div class="wrap"><div class="head"><div><h2>Long-stay residence and relocation</h2></div></div><div class="cards">{card(lang,'jppr','Japan permanent residence application','We check eligibility and timing first; a gyoseishoshi files the application and follows it through to approval.',False,preview,rel,btn='View details')}{card(lang,'mm2h','Malaysia MM2H (Malaysia My Second Home)','We assess Platinum, Gold, Silver and SEZ/SFZ for your family and follow the application through to the pass.',True,preview,rel,btn='View details')}{card(lang,'srrv','Philippines SRRV retiree visa','Open from age 40. We assess your option and deposit arrangements, then follow the application through to approval.',True,preview,rel,btn='View details')}</div></div></section>
 {cta_band(lang, preview, rel, 'Need help with something else?', sub='Tell us what you need to arrange and where. We will let you know whether we can help.')}
 <section class="tiny"><div class="wrap"><p class="note">Requirements and fees are set out in the relevant service details and individual quotation, subject to confirmation. Visa decisions are made by the relevant government authorities; account opening decisions are made by the bank.</p></div></section>'''
 
@@ -283,25 +306,28 @@ def provider_mode(d):
     if not BP.blockers(d): return 'public'
     if d['slug'] in OVERRIDE: return 'override'
     return 'preview'
+COUNTRY_ORDER = ['泰國', '日本', '英國', '越南', '馬來西亞', '菲律賓']
 def p_providers_list():
     groups = {}
     for d in PROVIDERS:
-        groups.setdefault(d.get('category') or '其他', []).append(d)
+        if provider_mode(d) == 'preview': continue  # 只列已核可上線的名片頁
+        groups.setdefault(d.get('country') or '其他', []).append(d)
+    order = sorted(groups, key=lambda c: (COUNTRY_ORDER.index(c) if c in COUNTRY_ORDER else 99, c))
     body = ''
-    for cat, items in groups.items():
+    for ctry in order:
         cards = ''
-        for d in items:
+        for d in groups[ctry]:
             zs = d.get('zdelp_score') or {}
             score = ('<div class="pv-score"><b>%s</b>%s</div>' % (html.escape(str(zs['score'])), BP.stars(zs['score']))) if zs.get('score') else ''
             cards += ('<a class="pv-card" href="providers/%s.html"><div class="pv-logo"><img src="assets/providers/%s.png" alt="%s 標誌"></div>'
                       '<div class="pv-b"><b>%s</b><span>%s</span>%s</div></a>') % (
                       d['slug'], d['slug'], html.escape(d['name']), html.escape(d['name']),
-                      html.escape('・'.join(x for x in [d.get('country'), d.get('city')] if x)), score)
-        body += '<div class="pv-group"><h2>%s</h2><div class="pv-grid">%s</div></div>' % (html.escape(cat), cards)
-    note = '內部預覽：以下為已建檔的在地機構與專業人士。名片頁上線條件＝身分與資格核對通過＋同意加入協議與具名上頁；同一服務類別滿 3 家才會開放該類別名單。'
+                      html.escape('・'.join(x for x in [d.get('category'), d.get('city')] if x)), score)
+        body += '<div class="pv-group"><h2>%s</h2><div class="pv-grid">%s</div></div>' % (html.escape(ctry), cards)
     return ('<section class="hero sm"><div class="wrap"><h1>在地機構與專業人士</h1>'
-            '<p class="lead">我們評估過的在地機構與專業人士，安排前你會先看到是誰。</p></div></section>'
-            '<section class="bg-grey"><div class="wrap"><div class="pv-note">%s</div>%s</div></section>') % (note, body)
+            '<p class="lead">各地負責辦理的機構與專業人士。我們先核對資格、進行專業驗證，再安排辦理；安排前你會先看到是誰。</p>'
+            '<div class="actions"><a class="btn btn-gold" href="contact.html">聯絡我們</a><a class="btn btn-ghost" href="verify.html">了解信任與保障</a></div></div></section>'
+            '<section class="bg-grey"><div class="wrap">%s<p class="note pv-more">名單持續增加中。找不到你需要的地區或服務，也可以直接聯絡我們。</p></div></section>') % body
 
 def _provider_wrap(body, title, desc):
     return ('<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
@@ -309,7 +335,7 @@ def _provider_wrap(body, title, desc):
             html.escape(title), html.escape(desc), FONTS, CSS, BP.EXTRA, nav('providers', 'zh', False, ''), body, footer('zh', False, ''), ANIM)
 
 def providers_list_html():
-    return _provider_wrap(p_providers_list(), 'ZDelp 在地機構與專業人士名單（內部預覽）', '已建檔在地機構與專業人士，尚未公開，等待 Fiamma 核可上線條件。')
+    return _provider_wrap(p_providers_list(), '在地機構與專業人士｜ZDelp', '泰國、日本、英國、越南等地負責辦理的在地機構與專業人士：先核對資格、進行專業驗證，再安排辦理。')
 
 def provider_page_html(d):
     mode = provider_mode(d); clean = mode in ('public', 'override')
