@@ -144,9 +144,9 @@ def p_index(lang, preview, rel):
                  + card(lang, 'uk', '英國置業與公司', '查看置業及公司相關服務。', False, preview, rel))
         return f'''
 <section class="hero"><div class="wrap"><div class="hero-grid"><div>
-<p class="kick">{t['brand']}</p>
-<h1>需要幫忙，<br>找<em>我們</em>。</h1>
-<p class="lead">簽證、銀行開戶、房產與公司事務。<br>你想辦什麼，告訴我們。</p>
+<h1 class="hero-h1">全球生活<br><em>在地服務平台</em></h1>
+<p class="hero-sub">需要幫忙，找我們。</p>
+<p class="lead">簽證、銀行開戶、房產與公司事務，由各地的在地機構與專業人士辦理，我們全程跟進。</p>
 <div class="actions"><a class="btn btn-gold btn-xl" href="{link('contact',lang,preview,rel)}">聯絡我們</a><a class="btn btn-ghost btn-xl" href="{svc}">查看服務</a></div>
 <div class="trust"><span><i>✓</i>一個窗口，聯通全球</span><span><i>✓</i>伴隨左右，安心無憂</span></div>
 </div><div class="hero-art">{img('hero-people.jpg','我們的專員與客人一起核對申請文件，背景是曼谷市景。','',preview,True,rel)}<div class="hero-cap"><i>●</i><div><b>LOCAL ASSISTANCE</b>在地辦理，持續跟進</div></div></div></div></div></section>
@@ -168,9 +168,9 @@ def p_index(lang, preview, rel):
              + card(lang, 'uk', 'UK property and company services', 'Explore services for buying property and company matters in the UK.', False, preview, rel))
     return f'''
 <section class="hero"><div class="wrap"><div class="hero-grid"><div>
-<p class="kick">{t['brand']}</p>
-<h1>Need help?<br>Talk to <em>us</em>.</h1>
-<p class="lead">Visas, bank accounts, property and company matters.<br>Tell us what you need help with.</p>
+<h1 class="hero-h1">Local services<br><em>for global living</em></h1>
+<p class="hero-sub">Need help? Talk to us.</p>
+<p class="lead">Visas, bank accounts, property and company matters, handled by local firms and professionals, with us following up throughout.</p>
 <div class="actions"><a class="btn btn-gold btn-xl" href="{link('contact',lang,preview,rel)}">Contact us</a><a class="btn btn-ghost btn-xl" href="{svc}">Explore services</a></div>
 <div class="trust"><span><i>✓</i>One contact point, local help worldwide</span><span><i>✓</i>Always by Your Side</span></div>
 </div><div class="hero-art">{img('hero-people.jpg','One of our specialists and a client checking application documents, with the Bangkok skyline behind them.','',preview,True,rel)}<div class="hero-cap"><i>●</i><div><b>LOCAL ASSISTANCE</b>Handled locally, followed up by us</div></div></div></div></div></section>
@@ -279,8 +279,8 @@ def p_contact(lang, preview, rel):
 <section class="bg-grey"><div class="wrap"><h2>Leave a message</h2><p class="muted">For example: a visa application, opening a bank account or finding help to manage a property. Please also tell us where you need the service.</p><div class="contact-grid"><div class="contact-form">{hs_block(lang, preview, 'zd-contact-form')}</div><aside class="contact-side" aria-label="Contact us directly">{contact_buttons(lang)}</aside></div></div></section>'''
 
 BUILDERS = dict(index=p_index, services=p_services, verify=p_verify, partners=p_partners, about=p_about, contact=p_contact)
-TITLES = {'zh': dict(index=('ZDelp｜需要幫忙，告訴我們。簽證、銀行開戶、房產與公司事務', '一個窗口，聯通全球在地服務。簽證、銀行開戶、房產與公司事務，由我們的專員或在地機構與專業人士辦理，我們評估、安排與持續跟進。'), services=('ZDelp 服務｜泰國簽證、銀行開戶、房產出租與代管、英國置業與公司', '找到需要的服務，查看辦理內容與費用；不確定也可以直接聯絡我們。'), verify=('ZDelp 信任與保障｜先把關，再安排', '先看資料再決定、費用先講清楚、我們全程跟進、有問題找我們；在地機構與專業人士經資格核對、專業驗證、口碑推薦與 ZDelp 評分。'), partners=('在地機構與專業人士加入我們｜讓專業，遇見合適需求', '你提供在地專業，我們負責需求評估、安排與持續跟進。加入條件、流程與申請。'), about=('關於我們｜在地・可靠・同行', '我們是一間在地服務與協助公司，與宅點互補協作。'), contact=('聯絡我們｜你想辦什麼，告訴我們', 'WhatsApp、LINE、電郵或留言，告訴我們你需要的協助。')),
-          'en': dict(index=('ZDelp | Need help? Talk to us. Visas, bank accounts, property and company matters', 'One contact point for local help worldwide. Visas, bank accounts, property and company matters, handled by our specialists or by local firms and professionals we have assessed. We assess, arrange and follow up.'), services=('ZDelp services | Thai visas, bank accounts, property management, UK property and company', 'Find the service you need and check what it covers and what it costs; contact us if unsure.'), verify=('Trust and protection | Checked before it is arranged', 'See who handles the work before you decide, fees explained up front, we follow up, one point of contact if something goes wrong; local firms and professionals go through credential checks, a professional verification, client recommendations and a ZDelp score.'), partners=('Join us as a local firm or professional | Connect your expertise with the right needs', 'You provide local expertise; we assess needs, arrange the service and follow up. Requirements, joining process and application.'), about=('About us | Local. Reliable. With you.', 'ZDelp Limited is a company providing local services and assistance; ZDelp and Zagdim are two independent companies.'), contact=('Contact us | Tell us what you need help with', 'WhatsApp, LINE, email or leave a message about the help you need.'))}
+TITLES = {'zh': dict(index=('ZDelp｜全球生活在地服務平台：海外簽證、開戶、房產與公司事務', '一個窗口，聯通全球在地服務。簽證、銀行開戶、房產與公司事務，由我們的專員或在地機構與專業人士辦理，我們評估、安排與持續跟進。'), services=('ZDelp 服務｜泰國簽證、銀行開戶、房產出租與代管、英國置業與公司', '找到需要的服務，查看辦理內容與費用；不確定也可以直接聯絡我們。'), verify=('ZDelp 信任與保障｜先把關，再安排', '先看資料再決定、費用先講清楚、我們全程跟進、有問題找我們；在地機構與專業人士經資格核對、專業驗證、口碑推薦與 ZDelp 評分。'), partners=('在地機構與專業人士加入我們｜讓專業，遇見合適需求', '你提供在地專業，我們負責需求評估、安排與持續跟進。加入條件、流程與申請。'), about=('關於我們｜在地・可靠・同行', '我們是一間在地服務與協助公司，與宅點互補協作。'), contact=('聯絡我們｜你想辦什麼，告訴我們', 'WhatsApp、LINE、電郵或留言，告訴我們你需要的協助。')),
+          'en': dict(index=('ZDelp | Local services for global living: visas, bank accounts, property and company matters', 'One contact point for local help worldwide. Visas, bank accounts, property and company matters, handled by our specialists or by local firms and professionals we have assessed. We assess, arrange and follow up.'), services=('ZDelp services | Thai visas, bank accounts, property management, UK property and company', 'Find the service you need and check what it covers and what it costs; contact us if unsure.'), verify=('Trust and protection | Checked before it is arranged', 'See who handles the work before you decide, fees explained up front, we follow up, one point of contact if something goes wrong; local firms and professionals go through credential checks, a professional verification, client recommendations and a ZDelp score.'), partners=('Join us as a local firm or professional | Connect your expertise with the right needs', 'You provide local expertise; we assess needs, arrange the service and follow up. Requirements, joining process and application.'), about=('About us | Local. Reliable. With you.', 'ZDelp Limited is a company providing local services and assistance; ZDelp and Zagdim are two independent companies.'), contact=('Contact us | Tell us what you need help with', 'WhatsApp, LINE, email or leave a message about the help you need.'))}
 
 ORG = {"@context": "https://schema.org", "@type": "Organization", "@id": "https://zdelp.co/#organization", "name": "ZDelp", "legalName": "ZDelp Limited", "url": "https://zdelp.co/", "sameAs": ["https://zagdim.com/zdelp/", "https://www.facebook.com/ZDelpThailifeservice"], "logo": "https://zdelp.co/assets/zdelp.png", "address": {"@type": "PostalAddress", "addressRegion": "Hong Kong", "addressCountry": "HK"}, "slogan": "Local. Reliable. With you."}
 
